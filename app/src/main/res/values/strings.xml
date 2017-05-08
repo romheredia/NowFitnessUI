@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Now Fitness UI</string>
+    <string name="title_activity_splash">SplashActivity</string>
+
+    <string name="text_view_first_name">First Name</string>
+    <string name="text_view_last_name">Last Name</string>
+    <string name="button_save">Save</string>
+
+    <string name="action_user_profile">User Profile</string>
+
+    <string name="fragment_rssfeed">RSS FEED</string>
+    <string name="fragment_generate">Generate</string>
+    <string name="fragment_wod">WOD</string>
+
+</resources>
