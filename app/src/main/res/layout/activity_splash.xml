@@ -17,10 +17,12 @@
 
         <ImageView
             android:id="@+id/imageView_splash_logo"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:maxWidth="180dp"
             android:contentDescription="@string/app_name"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/splash_logo" />
 
     </LinearLayout>
 

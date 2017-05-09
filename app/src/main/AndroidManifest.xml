@@ -9,9 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/NowTheme">
-        <activity android:name=".MainActivity">
 
-        </activity>
         <activity
             android:name=".SplashActivity"
             android:label="@string/title_activity_splash"
@@ -21,9 +19,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+
         <activity android:name=".UserProfileActivity"></activity>
+        <activity android:name=".MainActivity"></activity>
+
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
