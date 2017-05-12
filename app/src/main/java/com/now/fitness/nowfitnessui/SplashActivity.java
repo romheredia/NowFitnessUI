@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 public class SplashActivity extends AppCompatActivity {
@@ -17,6 +18,11 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        View decorView = getWindow().getDecorView();
+        // Hide the status bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        Log.i("splash screen activity","value: "+uiOptions);
+        decorView.setSystemUiVisibility(uiOptions);
         setContentView(R.layout.activity_splash);
 
         new Handler().postDelayed(new Runnable() {
