@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new RSSFeedFragment(), "RSS Feed");
-        adapter.addFragment(new GenerateFragment(), "Generate");
-        adapter.addFragment(new WODFragment(), "WOD");
+        adapter.addFragment(new GenerateFragment(), "My Workout");
+        adapter.addFragment(new WODFragment(), "NOW");
         viewPager.setAdapter(adapter);
     }
 

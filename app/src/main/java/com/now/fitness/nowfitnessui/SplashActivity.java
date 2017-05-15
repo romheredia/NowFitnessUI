@@ -9,11 +9,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 
 public class SplashActivity extends AppCompatActivity {
 
     //Splash Screen Timer
     private static int SPLASH_TIMER = 2000;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.now.fitness.nowfitnessui">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +11,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/NowTheme">
-
         <activity
             android:name=".SplashActivity"
             android:label="@string/title_activity_splash"
@@ -20,11 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".UserProfileActivity"></activity>
-        <activity android:name=".MainActivity"></activity>
-
+        <activity android:name=".UserProfileActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".MyWorkoutActivity"></activity>
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

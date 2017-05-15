@@ -9,7 +9,9 @@
     <string name="action_user_profile">User Profile</string>
 
     <string name="fragment_rssfeed">RSS FEED</string>
-    <string name="fragment_generate">Generate</string>
-    <string name="fragment_wod">WOD</string>
+    <string name="fragment_generate">My Workout</string>
+    <string name="fragment_wod">NOW</string>
+
+    <string name="myworkout_counter">1/4</string>
 
 </resources>
