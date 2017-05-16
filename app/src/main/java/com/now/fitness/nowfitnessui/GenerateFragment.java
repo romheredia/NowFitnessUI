@@ -31,16 +31,17 @@ public class GenerateFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_generate, container, false);
         context = view.getContext();
 
-        button = (Button) view.findViewById(R.id.button);
+        button = (Button) view.findViewById(R.id.button1);
         button.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View view) {
-                startActivity(new Intent(context, MyWorkoutActivity.class));
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), MyWorkoutActivity.class));
             }
         });
 
 
-        return inflater.inflate(R.layout.fragment_generate, container, false);
+        //return inflater.inflate(R.layout.fragment_generate, container, false);
+        return view;
     }
 
 //    public void onClick_Button(View view) {
