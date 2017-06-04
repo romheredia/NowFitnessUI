@@ -1,17 +1,12 @@
 <resources>
-    <string name="app_name">Now Fitness UI</string>
-    <string name="title_activity_splash">SplashActivity</string>
+    <string name="app_name">Now Fitness</string>
+    <string name="item_title_user_profile">User Profile</string>
 
     <string name="text_view_first_name">First Name</string>
     <string name="text_view_last_name">Last Name</string>
-    <string name="button_save">Save</string>
 
-    <string name="action_user_profile">User Profile</string>
+    <string name="button_text_done">Done</string>
 
-    <string name="fragment_rssfeed">RSS FEED</string>
-    <string name="fragment_generate">My Workout</string>
-    <string name="fragment_wod">NOW</string>
-
-    <string name="myworkout_counter">1/4</string>
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

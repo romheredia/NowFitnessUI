@@ -1,63 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.now.fitness.nowfitnessui.UserProfileActivity">
-
+    android:padding="@dimen/layout_padding"
+    tools:context="com.now.fitness.nowfitnessui.Activity.UserProfileActivity">
 
     <ImageView
         android:id="@+id/imageView_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:maxWidth="180dp"
+        android:maxWidth="@dimen/logo_width"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="@dimen/logo_margin"
+        android:layout_marginBottom="@dimen/logo_margin"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/now_logo_blue" />
+        android:src="@drawable/now_logo_blue"/>
 
-    <LinearLayout
-        android:id="@+id/linearLayoutUserProfile"
+    <TextView
+        android:id="@+id/textView_FirstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_view_first_name"
+        android:layout_below="@id/imageView_logo"/>
+
+    <EditText
+        android:id="@+id/editText_FirstName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerInParent="true"
-        android:padding="@dimen/layout_padding">
+        android:inputType="text"
+        android:layout_below="@id/textView_FirstName"/>
 
-        <TextView
-            android:id="@+id/textViewFirstName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/text_view_first_name"/>
+    <TextView
+        android:id="@+id/textView_LastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_view_last_name"
+        android:layout_below="@id/editText_FirstName"/>
 
-        <EditText
-            android:id="@+id/editTextFirstName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"/>
+    <EditText
+        android:id="@+id/editText_LastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:layout_below="@id/textView_LastName"/>
 
-        <TextView
-            android:id="@+id/textViewLastName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/text_view_last_name"/>
-
-        <EditText
-            android:id="@+id/editTextLastName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"/>
-
-        <Button
-            android:id="@+id/userProfileSave"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/button_save"
-            android:onClick="onClick_UserProfileSave"/>
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/button_Done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_text_done"
+        android:layout_below="@id/editText_LastName"
+        android:onClick="onClick_UserProfileDone"/>
 
 </RelativeLayout>
-

@@ -12,18 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/NowTheme">
         <activity
-            android:name=".SplashActivity"
-            android:label="@string/title_activity_splash"
+            android:name=".Activity.SplashActivity"
             android:theme="@style/NowTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-        <activity android:name=".UserProfileActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".MyWorkoutActivity"></activity>
+        <activity android:name=".Activity.UserProfileActivity" />
+
+        <activity android:name=".Activity.MainActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
     </application>
 
 </manifest>
