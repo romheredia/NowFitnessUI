@@ -51,6 +51,4 @@ public class NewsFragment extends Fragment {
 
         return mView;
     }
-
-
 }

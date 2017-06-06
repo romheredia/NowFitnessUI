@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.now.fitness.nowfitnessui.Object.RssFeedItem;
 
@@ -26,9 +27,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
  * Created by Rom on 4/06/2017.
  */
 
-public class RssFeedReader extends AsyncTask<Void, Void, Void> {
+public class RssFeedReader extends AsyncTask<Void, Void, Boolean> {
 
-        private String rssFeedUrl = "http://rss.nytimes.com/services/xml/rss/nyt/Nutrition.xml";
+    private String rssFeedUrl = "http://rss.nytimes.com/services/xml/rss/nyt/Nutrition.xml";
 
     private Context mContext;
     private SwipeRefreshLayout mSwipeLayout;
@@ -38,7 +39,7 @@ public class RssFeedReader extends AsyncTask<Void, Void, Void> {
 
     ProgressDialog mProgressDialog;
 
-    public RssFeedReader (Context context, RecyclerView recyclerView, SwipeRefreshLayout swipeRefreshLayout) {
+    public RssFeedReader(Context context, RecyclerView recyclerView, SwipeRefreshLayout swipeRefreshLayout) {
         this.mContext = context;
         this.mRecyclerView = recyclerView;
         this.mSwipeLayout = swipeRefreshLayout;
@@ -48,61 +49,73 @@ public class RssFeedReader extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected void onPreExecute() {
-//        super.onPreExecute();
-//        mProgressDialog.show();
         mSwipeLayout.setRefreshing(true);
     }
 
     @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
-//        mProgressDialog.dismiss();
+    protected void onPostExecute(Boolean success) {
         mSwipeLayout.setRefreshing(false);
 
-        RssFeedAdapter rssFeedAdapter = new RssFeedAdapter(mContext, rssFeedItems);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        mRecyclerView.setAdapter(rssFeedAdapter);
+        if(success) {
+            RssFeedAdapter rssFeedAdapter = new RssFeedAdapter(mContext, rssFeedItems);
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+            mRecyclerView.setAdapter(rssFeedAdapter);
+        } else {
+            Toast.makeText(mContext, "Failed to get RSS Feed.", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
-    protected Void doInBackground(Void... params) {
-        RssFeedParser(getRssFeedData());
-        return null;
+    protected Boolean doInBackground(Void... voids) {
+        try {
+            if (getRssFeedData() != null) {
+                RssFeedParser(getRssFeedData());
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     private void RssFeedParser(Document data) {
-        if (data != null) {
-            rssFeedItems = new ArrayList<>();
+        try {
+            if (data != null) {
+                rssFeedItems = new ArrayList<>();
 
-            Element root = data.getDocumentElement();
-            Node channel = root.getChildNodes().item(1);
-            NodeList items = channel.getChildNodes();
+                Element root = data.getDocumentElement();
+                Node channel = root.getChildNodes().item(1);
+                NodeList items = channel.getChildNodes();
 
-            for (int i = 0; i < items.getLength(); i++) {
-                Node currentChild = items.item(i);
+                for (int i = 0; i < items.getLength(); i++) {
+                    Node currentChild = items.item(i);
 
-                if (currentChild.getNodeName().equalsIgnoreCase("item")) {
-                    RssFeedItem item = new RssFeedItem();
-                    NodeList itemChilds = currentChild.getChildNodes();
+                    if (currentChild.getNodeName().equalsIgnoreCase("item")) {
+                        RssFeedItem item = new RssFeedItem();
+                        NodeList itemChilds = currentChild.getChildNodes();
 
-                    for (int j = 0; j < itemChilds.getLength(); j++) {
-                        Node current = itemChilds.item(j);
-                        if(current.getNodeName().equalsIgnoreCase("title")){
-                            item.setTitle(current.getTextContent());
-                        } else if (current.getNodeName().equalsIgnoreCase("link")){
-                            item.setLink(current.getTextContent());
-                        } else if (current.getNodeName().equalsIgnoreCase("description")){
-                            item.setDescription(current.getTextContent());
-                        } else if (current.getNodeName().equalsIgnoreCase("pubDate")){
-                            item.setPubDate(current.getTextContent());
-                        } else if (current.getNodeName().equalsIgnoreCase("media:content")){
-                            String imageUrl = current.getAttributes().item(0).getTextContent();
-                            item.setImageUrl(imageUrl);
+                        for (int j = 0; j < itemChilds.getLength(); j++) {
+                            Node current = itemChilds.item(j);
+                            if (current.getNodeName().equalsIgnoreCase("title")) {
+                                item.setTitle(current.getTextContent());
+                            } else if (current.getNodeName().equalsIgnoreCase("link")) {
+                                item.setLink(current.getTextContent());
+                            } else if (current.getNodeName().equalsIgnoreCase("description")) {
+                                item.setDescription(current.getTextContent());
+                            } else if (current.getNodeName().equalsIgnoreCase("pubDate")) {
+                                item.setPubDate(current.getTextContent());
+                            } else if (current.getNodeName().equalsIgnoreCase("media:content")) {
+                                String imageUrl = current.getAttributes().item(0).getTextContent();
+                                item.setImageUrl(imageUrl);
+                            }
                         }
+                        rssFeedItems.add(item);
                     }
-                    rssFeedItems.add(item);
+
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

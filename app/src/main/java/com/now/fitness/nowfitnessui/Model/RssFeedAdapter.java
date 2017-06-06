@@ -50,9 +50,7 @@ public class RssFeedAdapter extends RecyclerView.Adapter<RssFeedAdapter.RssFeedV
     }
 
     @Override
-    public int getItemCount() {
-        return mRssFeedItems.size();
-    }
+    public int getItemCount() { return mRssFeedItems.size(); }
 
     public class RssFeedViewHolder extends RecyclerView.ViewHolder {
         private TextView titleText, titleDescription, pubDate;

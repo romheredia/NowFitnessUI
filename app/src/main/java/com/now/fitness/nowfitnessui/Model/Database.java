@@ -6,14 +6,17 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.now.fitness.nowfitnessui.DAL.MyWorkoutPlanDAL;
 import com.now.fitness.nowfitnessui.DAL.UserProfileDAL;
 import com.now.fitness.nowfitnessui.DAL.WorkoutCategoryDAL;
 import com.now.fitness.nowfitnessui.DAL.WorkoutCreatedDAL;
 import com.now.fitness.nowfitnessui.DAL.WorkoutListDAL;
+import com.now.fitness.nowfitnessui.Interface.IMyWorkoutPlan;
 import com.now.fitness.nowfitnessui.Interface.IUserProfile;
 import com.now.fitness.nowfitnessui.Interface.IWorkoutCategory;
 import com.now.fitness.nowfitnessui.Interface.IWorkoutCreated;
 import com.now.fitness.nowfitnessui.Interface.IWorkoutList;
+import com.now.fitness.nowfitnessui.Object.MyWorkoutPlan;
 
 /**
  * Created by Maycor Gerilla on 5/30/2017.
@@ -24,10 +27,11 @@ public class Database {
     private DatabaseHelper mDbHelper;
     private static final int DATABASE_VERSION = 1;
     private final Context mContext;
-    public static UserProfileDAL mUserDao;
-    public static WorkoutCategoryDAL mWorkoutCategoryDAO;
-    public static WorkoutCreatedDAL mWorkoutCreatedDAO;
-    public static WorkoutListDAL mWorkoutListDAO;
+    public static UserProfileDAL mUserDAL;
+    public static WorkoutCategoryDAL mWorkoutCategoryDAL;
+    public static WorkoutCreatedDAL mWorkoutCreatedDAL;
+    public static WorkoutListDAL mWorkoutListDAL;
+    public static MyWorkoutPlanDAL mMyWorkoutPlanDAL;
     private static final String TAG = "NOWFitness:Database";
 
     public Database(Context context) {
@@ -38,11 +42,12 @@ public class Database {
         mDbHelper = new DatabaseHelper(mContext);
         SQLiteDatabase mDb = mDbHelper.getWritableDatabase();
 
-        Log.i(TAG,"Open DB");
-        mUserDao = new UserProfileDAL(mDb);
-        mWorkoutCategoryDAO = new WorkoutCategoryDAL(mDb);
-        mWorkoutCreatedDAO = new WorkoutCreatedDAL(mDb);
-        mWorkoutListDAO = new WorkoutListDAL(mDb);
+        Log.i(TAG, "Open DB");
+        mUserDAL = new UserProfileDAL(mDb);
+        mWorkoutCategoryDAL = new WorkoutCategoryDAL(mDb);
+        mWorkoutCreatedDAL = new WorkoutCreatedDAL(mDb);
+        mWorkoutListDAL = new WorkoutListDAL(mDb);
+        mMyWorkoutPlanDAL = new MyWorkoutPlanDAL(mDb);
 
         return this;
     }
@@ -50,8 +55,6 @@ public class Database {
     public void close() {
         mDbHelper.close();
     }
-
-
 
 
     private static class DatabaseHelper extends SQLiteOpenHelper {
@@ -66,8 +69,9 @@ public class Database {
             db.execSQL(IWorkoutCategory.IWorkoutCategorySchema.WORKOUTCAT_TABLE_CREATE);
             db.execSQL(IWorkoutCreated.IWorkoutCreatedSchema.WORKOUTCREATED_TABLE_CREATE);
             db.execSQL(IWorkoutList.IWorkoutListSchema.WORKOUTLIST_TABLE_CREATE);
+            db.execSQL(IMyWorkoutPlan.IMyWorkoutPlanSchema.MYWORKOUTPLAN_TABLE_CREATE);
 
-            Log.i(TAG,"populate table");
+            Log.i(TAG, "populate table");
             db.execSQL(IWorkoutCategory.IWorkoutCategorySchema.POPULATE_TABLE);
         }
 
@@ -86,8 +90,9 @@ public class Database {
                     + IWorkoutCreated.IWorkoutCreatedSchema.WORKOUTCREATED_TABLE_CREATE);
             db.execSQL("DROP TABLE IF EXISTS "
                     + IWorkoutList.IWorkoutListSchema.WORKOUTLIST_TABLE_CREATE);
+            db.execSQL("DROP TABLE IF EXISTS "
+                    + IMyWorkoutPlan.IMyWorkoutPlanSchema.MYWORKOUTPLAN_TABLE_CREATE);
             onCreate(db);
-
         }
     }
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/layout_padding">
+
+    <TextView
+        android:id="@+id/textView_WorkoutName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Workout Name"/>
+
+    <EditText
+        android:id="@+id/editText_WorkoutName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_WorkoutName"/>
+
+    <TextView
+        android:id="@+id/textView_NumberOfWorkouts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Number of Workouts"
+        android:layout_below="@id/editText_WorkoutName"/>
+
+    <EditText
+        android:id="@+id/editText_NumberOfWorkouts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:layout_below="@id/textView_NumberOfWorkouts"/>
+
+    <Button
+        android:id="@+id/button_CreateWorkoutPlan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Workout Plan"
+        android:layout_below="@id/editText_NumberOfWorkouts"/>
+
+</RelativeLayout>

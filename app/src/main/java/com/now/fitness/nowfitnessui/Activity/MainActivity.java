@@ -20,6 +20,14 @@ import com.now.fitness.nowfitnessui.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ *
+ * @author Romeric Heredia
+ *
+ *
+ * */
+
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar mToolBar;
