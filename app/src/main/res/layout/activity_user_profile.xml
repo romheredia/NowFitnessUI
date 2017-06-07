@@ -51,7 +51,104 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/button_text_done"
-        android:layout_below="@id/editText_LastName"
-        android:onClick="onClick_UserProfileDone"/>
+        android:onClick="onClick_UserProfileDone"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editText_Height"/>
+
+    <TextView
+        android:id="@+id/textView_Gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editText_LastName"
+        android:text="@string/text_view_gender"
+        android:layout_alignRight="@+id/textView_LastName"
+        android:layout_alignEnd="@+id/textView_LastName" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_Gender"
+        android:layout_toEndOf="@+id/textView_FirstName"
+        android:layout_toRightOf="@+id/textView_FirstName"
+        android:orientation="horizontal"
+        android:id="@+id/radioGroupGender"
+        android:layout_marginRight="5dp">
+
+    <RadioButton
+        android:id="@+id/radioButtonFemale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/radioGroup"
+        android:layout_alignLeft="@+id/radioGroup"
+        android:layout_alignStart="@+id/radioGroup"
+        android:text="@string/radioBtn_Female"
+        android:onClick="onRadioButtonClicked" />
+
+        <RadioButton
+            android:id="@+id/radioButtonMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/radioGroup"
+            android:layout_toEndOf="@+id/radioGroup"
+            android:layout_toRightOf="@+id/radioGroup"
+            android:onClick="onRadioButtonClicked"
+            android:text="@string/radioBtn_Male" />
+
+        <RadioButton
+            android:id="@+id/radioButtonOther"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/editTextUPLname"
+            android:layout_alignRight="@+id/editTextUPLname"
+            android:layout_alignTop="@+id/radioGroup"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:onClick="onRadioButtonClicked"
+            android:text="@string/radioBtn_Other" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView_Weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/radioGroupGender"
+        android:layout_marginTop="15dp"
+        android:text="@string/text_view_weight" />
+
+    <TextView
+        android:id="@+id/textView_Height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_view_height"
+        android:layout_below="@+id/editText_Weight"
+        android:layout_alignRight="@+id/textView_Weight"
+        android:layout_alignEnd="@+id/textView_Weight" />
+
+    <EditText
+        android:id="@+id/editText_Weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:layout_below="@+id/textView_Weight"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:id="@+id/editText_Height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_Height"
+        android:layout_alignParentLeft="true"
+        android:inputType="text"
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>
