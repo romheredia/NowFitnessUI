@@ -9,8 +9,24 @@ public class WorkoutList {
     private String categoryCode;
     private String exerciseName;
     private int repetitions;
-    private int exerciseId;
-    private boolean withEquipment;
+    private int workoutId;
+    private String tag;
+
+    public int getWorkoutId() {
+        return workoutId;
+    }
+
+    public void setWorkoutId(int workoutId) {
+        this.workoutId = workoutId;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
 
     public String getCategoryCode() {
         return categoryCode;
@@ -36,19 +52,4 @@ public class WorkoutList {
         this.repetitions = repetitions;
     }
 
-    public int getExerciseId() {
-        return exerciseId;
-    }
-
-    public void setExerciseId(int exerciseId) {
-        this.exerciseId = exerciseId;
-    }
-
-    public boolean isWithEquipment() {
-        return withEquipment;
-    }
-
-    public void setWithEquipment(boolean withEquipment) {
-        this.withEquipment = withEquipment;
-    }
 }
