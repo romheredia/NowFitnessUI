@@ -27,7 +27,7 @@ public interface IUserProfile {
                 + USER_TABLE
                 + " ("
                 + COLUMN_ID
-                + " INTEGER PRIMARY KEY, "
+                + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + COLUMN_FNAME
                 + " TEXT NOT NULL, "
                 + COLUMN_LNAME

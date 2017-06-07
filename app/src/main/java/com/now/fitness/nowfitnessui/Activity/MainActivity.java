@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -32,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
 
     private Toolbar mToolBar;
     private ViewPager mViewPager;
+    static private final String TAG = "NOWFitness-UI";
+    private String fname;
+    private String lname;
+    private String userId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs_Main);
         tabLayout.setupWithViewPager(mViewPager);
+
+        fname = getIntent().getStringExtra("firstname");
+        lname = getIntent().getStringExtra("lastname");
+        userId = getIntent().getStringExtra("userId");
+
     }
 
     @Override
@@ -58,8 +69,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.item_UserProfile:
-                startActivity(new Intent(MainActivity.this, UserProfileActivity.class));
+            case R.id.item_UserProfile:{
+                Intent intent = new Intent(MainActivity.this, UserProfileActivity.class);
+                intent.putExtra("firstname", fname);
+                intent.putExtra("lastname", lname);
+                intent.putExtra("userId", userId);
+
+                startActivity(intent);
+            }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

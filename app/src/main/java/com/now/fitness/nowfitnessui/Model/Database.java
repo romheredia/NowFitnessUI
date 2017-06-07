@@ -73,6 +73,7 @@ public class Database {
 
             Log.i(TAG, "populate table");
             db.execSQL(IWorkoutCategory.IWorkoutCategorySchema.POPULATE_TABLE);
+            db.execSQL(IWorkoutList.IWorkoutListSchema.POPULATE_TABLE);
         }
 
         @Override

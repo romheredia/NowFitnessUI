@@ -92,7 +92,7 @@ public class UserProfileDAL extends DBAdapter implements IUserProfile, IUserProf
         try {
             return super.update(USER_TABLE, getContentValue(), COLUMN_ID, null)>0;
         } catch (SQLiteConstraintException ex){
-            Log.w(TAG, ex.getMessage());
+            Log.d(TAG, "error: "+ex.getMessage());
             return false;
         }
     }
@@ -101,8 +101,7 @@ public class UserProfileDAL extends DBAdapter implements IUserProfile, IUserProf
     public List<UserProfile> findAll() {
 
         List<UserProfile> userList = new ArrayList<UserProfile>();
-        cursor = super.query(USER_TABLE, USER_COLUMNS, null,
-                null, COLUMN_ID);
+        cursor = super.query(USER_TABLE, USER_COLUMNS, null, null, COLUMN_ID);
 
         if (cursor != null) {
             cursor.moveToFirst();
@@ -120,8 +119,7 @@ public class UserProfileDAL extends DBAdapter implements IUserProfile, IUserProf
     @Override
     public List<UserProfile> findById(int id) {
         List<UserProfile> userList = new ArrayList<UserProfile>();
-        cursor = super.query(USER_TABLE, null, COLUMN_ID + " = ?",
-                new String[] { id+"" }, null);
+        cursor = super.query(USER_TABLE, null, COLUMN_ID + " = ?", new String[] { id+"" }, null);
 
         if (cursor != null) {
             cursor.moveToFirst();
@@ -163,7 +161,7 @@ public class UserProfileDAL extends DBAdapter implements IUserProfile, IUserProf
 
         initialValues = new ContentValues();
 
-        initialValues.put("USER_ID", user.getUserId());
+        //initialValues.put("USER_ID", user.getUserId());
         initialValues.put("FIRSTNAME", user.getFirstname());
         initialValues.put("LASTNAME", user.getLastname());
         initialValues.put("GENDER", user.getGender());
