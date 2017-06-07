@@ -17,6 +17,10 @@ import com.now.fitness.nowfitnessui.R;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/**
+ * This class is the User Profile Activity
+ * @author Maycor Gerilla, Romeric Heredia
+ **/
 public class UserProfileActivity extends AppCompatActivity {
 
     static private final String TAG = "NOWFitness-UI";
@@ -34,6 +38,10 @@ public class UserProfileActivity extends AppCompatActivity {
 
     int duration = Toast.LENGTH_LONG;
 
+    /**
+     * Creates the view for UserProfileActivity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +97,11 @@ public class UserProfileActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     *  Retrieves the user input from the View
+     *  @param view
+     */
+
     public void onClick_UserProfileDone(View view) {
         int flag = 0;
         //get value of editText
@@ -110,6 +123,17 @@ public class UserProfileActivity extends AppCompatActivity {
             flag++;
         }else if(!Pattern.matches("[a-zA-Z]+", mLnameTextView.getText().toString())) {
             mLnameTextView.setError("Incorrect input!");
+            flag++;
+        }
+
+        //perform validation for height and weight input
+        if(Pattern.matches("[a-zA-Z]+", mHeightTextView.getText().toString())) {
+            mHeightTextView.setError("Incorrect input!");
+            flag++;
+        }
+
+        if(Pattern.matches("[a-zA-Z]+", mWeightTextView.getText().toString())) {
+            mWeightTextView.setError("Incorrect input!");
             flag++;
         }
 
@@ -161,6 +185,10 @@ public class UserProfileActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Tags the radio button checked
+     * @param view
+     */
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();

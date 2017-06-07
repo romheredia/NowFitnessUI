@@ -14,6 +14,10 @@ import com.now.fitness.nowfitnessui.R;
 
 import java.util.List;
 
+/**
+ * This class is the Splash Activity which loads application Logo
+ * @author Romeric Heredia
+ */
 public class SplashActivity extends AppCompatActivity {
 
     //Splash Screen Timer
@@ -26,6 +30,10 @@ public class SplashActivity extends AppCompatActivity {
     private String userId;
 
 
+    /**
+     * Creates the Splash Activity View
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,8 +73,7 @@ public class SplashActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 }catch (Exception ex){
-                    Toast toast = Toast.makeText(getApplicationContext(), "Error: Unable to Connect to the database.", duration);
-                    toast.show();
+                    Toast.makeText(getApplicationContext(), R.string.prompt_error, duration).show();
                 }
 
                 finish();

@@ -11,7 +11,8 @@ import com.now.fitness.nowfitnessui.R;
 import java.util.ArrayList;
 
 /**
- * Created by Maycor Gerilla on 5/26/2017.
+ * This class is the Main Activity for the Name Your Workout functionality
+ * @author Maycor Gerilla on 5/26/2017.
  */
 
 public class NowMainActivity extends AppCompatActivity {
@@ -19,6 +20,10 @@ public class NowMainActivity extends AppCompatActivity {
     private TextView textViewName;
     private LinearLayout linearLayout;
 
+    /**
+    * Creates the View for the NowMainActivity
+     * @param savedInstanceState
+    */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_now_main);

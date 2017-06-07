@@ -17,9 +17,9 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
+ * This class NowActivity will generate workout from the database based on the supplied user name.
  * @author Maycor Gerilla on 5/26/2017.
  *
- * This class will generate workout from the database based on the supplied user name.
  */
 
 public class NowActivity extends AppCompatActivity {
@@ -30,6 +30,10 @@ public class NowActivity extends AppCompatActivity {
     int duration = Toast.LENGTH_LONG;
     private List<String> workoutGen;
 
+    /**
+     * Creates the view for NowActivity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +47,10 @@ public class NowActivity extends AppCompatActivity {
         workoutGen = new ArrayList<String>();
     }
 
+    /**
+     * Generates the NOWFitness workout
+     * @param v
+     */
     public void onClick_NOWorkout(View v) {
         String inputName = editTextName.getText().toString();
         if (editTextName.getText().toString().length() == 0) {
@@ -71,8 +79,7 @@ public class NowActivity extends AppCompatActivity {
                 }
 
             } catch (Exception ex) {
-                Toast toast = Toast.makeText(this, "Error: Unable to Connect to the database." + ex.getMessage(), duration);
-                toast.show();
+                Toast.makeText(this, R.string.prompt_error+ex.getMessage(), duration).show();
             }
 
             finish();

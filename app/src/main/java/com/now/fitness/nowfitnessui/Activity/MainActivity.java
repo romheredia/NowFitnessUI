@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -23,7 +22,7 @@ import java.util.List;
 
 /**
  *
- *
+ * This class is the Main Activity
  * @author Romeric Heredia
  *
  *
@@ -39,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
     private String userId;
 
 
+    /**
+     * Creates the view for MainActivity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +62,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Creates the Menu Option
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -66,6 +74,11 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Loads the User Profile Activity
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -83,6 +96,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     *  Sets the View Pager
+     * @param viewPager
+     */
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new NewsFragment(), "News");
@@ -91,6 +108,9 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
+    /**
+     * This class is the View Page Adapter
+     */
     public class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
