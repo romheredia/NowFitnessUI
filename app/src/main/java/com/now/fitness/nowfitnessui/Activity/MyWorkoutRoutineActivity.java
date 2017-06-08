@@ -3,6 +3,7 @@ package com.now.fitness.nowfitnessui.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -21,6 +22,7 @@ public class MyWorkoutRoutineActivity extends AppCompatActivity {
     private ListView mListView;
     private Button mButton;
 
+    private int myWorkoutPlanId;
     private int myWorkoutId;
 
 
@@ -36,18 +38,21 @@ public class MyWorkoutRoutineActivity extends AppCompatActivity {
         Intent receivedIntent = getIntent();
 
         //now get the itemID we passed as an extra
-        myWorkoutId = receivedIntent.getIntExtra("MyWorkoutId",-1); //NOTE: -1 is just the default value
+        myWorkoutPlanId = receivedIntent.getIntExtra("MyWorkoutPlanId",-1);
+        myWorkoutId = receivedIntent.getIntExtra("MyWorkoutId",-1);
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(MyWorkoutRoutineActivity.this, "MyWorkout ID " + String.valueOf(myWorkoutId), Toast.LENGTH_LONG).show();
+//                Toast.makeText(MyWorkoutRoutineActivity.this, "MyWorkout ID " + String.valueOf(myWorkoutId), Toast.LENGTH_LONG).show();
                 Intent WorkoutListActivityIntent = new Intent(MyWorkoutRoutineActivity.this, WorkoutListActivity.class);
-                WorkoutListActivityIntent.putExtra("MyWorkoutId", myWorkoutId);
 
+                WorkoutListActivityIntent.putExtra("xMyWorkoutPlanId:", myWorkoutPlanId);
+                Log.i("Workout Plan Id:", String.valueOf(myWorkoutPlanId));
+                WorkoutListActivityIntent.putExtra("xMyWorkoutId:", myWorkoutId);
+                Log.i("Workout Id:", String.valueOf(myWorkoutId));
                 startActivity(WorkoutListActivityIntent);
-//                finish();
             }
         });
 

@@ -78,6 +78,7 @@ public class MyWorkoutRoutineDAL extends DBAdapter implements IMyWorkoutRoutine,
         MyWorkoutRoutine myWorkoutRoutine = new MyWorkoutRoutine();
 
         int myWorkoutRoutineId;
+        int myWorkoutPlanId;
         int myWorkoutId;
         int workoutId;
 
@@ -86,6 +87,10 @@ public class MyWorkoutRoutineDAL extends DBAdapter implements IMyWorkoutRoutine,
             if (cursor.getColumnIndex(COLUMN_ROUTINE_ID) != -1) {
                 myWorkoutRoutineId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ROUTINE_ID));
                 myWorkoutRoutine.setMyWorkoutRoutineId(myWorkoutRoutineId);
+            }
+            if (cursor.getColumnIndex(COLUMN_PLAN_ID) != -1) {
+                myWorkoutPlanId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_PLAN_ID));
+                myWorkoutRoutine.setMyWorkoutPlanId(myWorkoutPlanId);
             }
             if (cursor.getColumnIndex(COLUMN_MYWORKOUT_ID) != -1) {
                 myWorkoutId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_MYWORKOUT_ID));

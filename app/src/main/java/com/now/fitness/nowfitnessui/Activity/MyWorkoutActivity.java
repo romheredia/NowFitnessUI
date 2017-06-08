@@ -39,12 +39,12 @@ public class MyWorkoutActivity extends AppCompatActivity {
 
     }
 
-    public void getMyWorkoutList(int myWorkoutPlanId) {
+    public void getMyWorkoutList(final int myWorkoutPlanId) {
         try {
             mDb = new Database(this);
             mDb.open();
 
-            final List<MyWorkout> myWorkoutList = Database.mMyWorkoutDAL.findByMyWorkoutPlanId(myWorkoutPlanId);
+            List<MyWorkout> myWorkoutList = Database.mMyWorkoutDAL.findByMyWorkoutPlanId(myWorkoutPlanId);
             ArrayList<String> nameList = new ArrayList<>();
 
             for (int i = 0; i < myWorkoutList.size(); i++) {
@@ -65,7 +65,11 @@ public class MyWorkoutActivity extends AppCompatActivity {
 //                    Toast.makeText(MyWorkoutActivity.this, String.valueOf(adapterView.getItemIdAtPosition(i)), Toast.LENGTH_LONG).show();
                     Intent myWorkoutActivityIntent = new Intent(MyWorkoutActivity.this, MyWorkoutRoutineActivity.class);
 
+                    myWorkoutActivityIntent.putExtra("MyWorkoutPlanId", myWorkoutPlanId);
+//                    Log.i("Workout Plan Id:", String.valueOf(myWorkoutPlanId));
                     myWorkoutActivityIntent.putExtra("MyWorkoutId", myWorkoutId);
+//                    Log.i("Workout Id:", String.valueOf(adapterView.getItemIdAtPosition(i)));
+
                     startActivity(myWorkoutActivityIntent);
                 }
             });

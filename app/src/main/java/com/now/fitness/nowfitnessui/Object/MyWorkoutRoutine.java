@@ -7,6 +7,7 @@ package com.now.fitness.nowfitnessui.Object;
 public class MyWorkoutRoutine {
 
     private int myWorkoutRoutineId;
+    private int myWorkoutPlanId;
     private int myWorkoutId;
     private int workoutId;
 
@@ -16,6 +17,14 @@ public class MyWorkoutRoutine {
 
     public void setMyWorkoutRoutineId(int myWorkoutRoutineId) {
         this.myWorkoutRoutineId = myWorkoutRoutineId;
+    }
+
+    public int getMyWorkoutPlanId() {
+        return myWorkoutPlanId;
+    }
+
+    public void setMyWorkoutPlanId(int myWorkoutPlanId) {
+        this.myWorkoutPlanId = myWorkoutPlanId;
     }
 
     public int getMyWorkoutId() {
