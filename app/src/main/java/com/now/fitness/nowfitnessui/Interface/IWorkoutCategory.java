@@ -5,7 +5,8 @@ import com.now.fitness.nowfitnessui.Object.WorkoutCategory;
 import java.util.List;
 
 /**
- * Created by Maycor Gerilla on 5/29/2017.
+ * This class is the interface for the WorkoutCategory data access layer
+ * @author  Maycor Gerilla on 5/29/2017.
  */
 
 public interface IWorkoutCategory {

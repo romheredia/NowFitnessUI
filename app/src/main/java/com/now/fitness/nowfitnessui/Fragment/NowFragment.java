@@ -14,6 +14,10 @@ import com.now.fitness.nowfitnessui.R;
 
 import static android.R.attr.button;
 
+/**
+ * This class is the fragment for Now Tab
+ * @author
+ */
 public class NowFragment extends Fragment {
 
     private View mView;
@@ -24,9 +28,19 @@ public class NowFragment extends Fragment {
         // Required empty public constructor
     }
 
+    /**
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); }
 
+    /**
+     * Creates the view for the fragment
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return View
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

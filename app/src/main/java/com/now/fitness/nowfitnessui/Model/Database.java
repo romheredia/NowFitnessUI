@@ -22,7 +22,8 @@ import com.now.fitness.nowfitnessui.Interface.IWorkoutList;
 import com.now.fitness.nowfitnessui.Object.MyWorkoutPlan;
 
 /**
- * Created by Maycor Gerilla on 5/30/2017.
+ * This class is responsible  for Database and table creation
+ * @author Maycor Gerilla on 5/30/2017.
  */
 
 public class Database {

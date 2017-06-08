@@ -7,18 +7,18 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.now.fitness.nowfitnessui.Interface.IWorkoutList;
-import com.now.fitness.nowfitnessui.Model.DBAdapter;
-import com.now.fitness.nowfitnessui.Object.MyWorkout;
+import com.now.fitness.nowfitnessui.Model.DBContentProvider;
 import com.now.fitness.nowfitnessui.Object.WorkoutList;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Maycor Gerilla on 5/30/2017.
+ *  This class is the Workout list created Data access layer which implements the interface IWorkoutCreated and IWorkoutCreatedSchema
+ * @author Maycor Gerilla on 5/29/2017.
  */
 
-public class WorkoutListDAL extends DBAdapter implements IWorkoutList, IWorkoutList.IWorkoutListSchema {
+public class WorkoutListDAL extends DBContentProvider implements IWorkoutList, IWorkoutList.IWorkoutListSchema {
     private final String TAG = "NOWFitness:Database";
 
     private Cursor cursor;
@@ -28,6 +28,11 @@ public class WorkoutListDAL extends DBAdapter implements IWorkoutList, IWorkoutL
         super(db);
     }
 
+    /**
+     * Retrieves result from cursor
+     * @param cursor
+     * @return WorkoutList
+     */
     @Override
     protected WorkoutList cursorToEntity(Cursor cursor) {
         WorkoutList wrk = new WorkoutList();
@@ -67,6 +72,11 @@ public class WorkoutListDAL extends DBAdapter implements IWorkoutList, IWorkoutL
         return wrk;
     }
 
+    /**
+     * Inserts workout to table tb_workoutlist
+     * @param lst
+     * @return boolean
+     */
     @Override
     public boolean insertExercise(WorkoutList lst) {
 
@@ -81,19 +91,7 @@ public class WorkoutListDAL extends DBAdapter implements IWorkoutList, IWorkoutL
 
     @Override
     public List<WorkoutList> findAll() {
-        List<WorkoutList> workoutList = new ArrayList<>();
-        cursor = super.query(WORKOUTLIST_TABLE, WORKOUTLIST_COLUMNS, null, null, COLUMN_ID);
-
-        if (cursor != null) {
-            cursor.moveToFirst();
-            while (!cursor.isAfterLast()) {
-                WorkoutList workoutListItem = cursorToEntity(cursor);
-                workoutList.add(workoutListItem);
-                cursor.moveToNext();
-            }
-            cursor.close();
-        }
-        return workoutList;
+        return null;
     }
 
     @Override
@@ -101,6 +99,11 @@ public class WorkoutListDAL extends DBAdapter implements IWorkoutList, IWorkoutL
         return null;
     }
 
+    /**
+     * Retrieves workout by name
+     * @param name
+     * @return List<WorkoutList>
+     */
     @Override
     public List<WorkoutList> findByName(String name) {
 
@@ -128,6 +131,10 @@ public class WorkoutListDAL extends DBAdapter implements IWorkoutList, IWorkoutL
         return workoutList;
     }
 
+    /**
+     * Sets the content valaue
+     * @param lst
+     */
     private void setContentValue(WorkoutList lst) {
 
         initialValues = new ContentValues();
@@ -140,6 +147,10 @@ public class WorkoutListDAL extends DBAdapter implements IWorkoutList, IWorkoutL
         initialValues.put("TAG", lst.getTag());
     }
 
+    /**
+     * retrieves the content values
+     * @return
+     */
     private ContentValues getContentValue() {
         return initialValues;
     }

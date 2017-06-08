@@ -7,30 +7,43 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.now.fitness.nowfitnessui.Interface.IWorkoutCreated;
-import com.now.fitness.nowfitnessui.Model.DBAdapter;
+import com.now.fitness.nowfitnessui.Model.DBContentProvider;
 import com.now.fitness.nowfitnessui.Object.WorkoutCreated;
 
 import java.util.List;
 
 /**
- * Created by Maycor Gerilla on 5/29/2017.
+ *  This class is the Workout created Data access layer which implements the interface IWorkoutCreated and IWorkoutCreatedSchema
+ * @author Maycor Gerilla on 5/29/2017.
  */
 
-public class WorkoutCreatedDAL extends DBAdapter implements IWorkoutCreated, IWorkoutCreated.IWorkoutCreatedSchema {
+public class WorkoutCreatedDAL extends DBContentProvider implements IWorkoutCreated, IWorkoutCreated.IWorkoutCreatedSchema {
     private final String TAG = "NOWFitness:Database";
 
     private Cursor cursor;
     private ContentValues initialValues;
 
+    /**
+     * @param db
+     */
     public WorkoutCreatedDAL(SQLiteDatabase db) {
         super(db);
     }
 
+    /**
+     * @param cursor
+     * @return WorkoutCreatedDAL
+     */
     @Override
     protected WorkoutCreatedDAL cursorToEntity(Cursor cursor) {
         return null;
     }
 
+    /**
+     *  Inserts the workoutto table tbworkout_saved
+     * @param work
+     * @return boolean
+     */
     @Override
     public boolean insertWorkout(WorkoutCreated work) {
 
@@ -43,6 +56,11 @@ public class WorkoutCreatedDAL extends DBAdapter implements IWorkoutCreated, IWo
         }
     }
 
+    /**
+     * Updates the selected workout
+     * @param work
+     * @return boolean
+     */
     @Override
     public boolean updateWorkout(WorkoutCreated work) {
         setContentValue(work);
@@ -54,6 +72,11 @@ public class WorkoutCreatedDAL extends DBAdapter implements IWorkoutCreated, IWo
         }
     }
 
+    /**
+     * Deletes the workout selected
+     * @param id
+     * @return boolean
+     */
     @Override
     public boolean deleteWorkout(int id) {
 
