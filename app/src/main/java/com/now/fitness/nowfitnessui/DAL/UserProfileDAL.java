@@ -7,17 +7,18 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.now.fitness.nowfitnessui.Interface.IUserProfile;
-import com.now.fitness.nowfitnessui.Model.DBAdapter;
+import com.now.fitness.nowfitnessui.Model.DBContentProvider;
 import com.now.fitness.nowfitnessui.Object.UserProfile;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Maycor Gerilla on 5/29/2017.
+ * This class is the data access layer for the UserProfile Model which imp
+ * @author  Maycor Gerilla on 5/29/2017.
  */
 
-public class UserProfileDAL extends DBAdapter implements IUserProfile, IUserProfile.IUserProfileSchema {
+public class UserProfileDAL extends DBContentProvider implements IUserProfile, IUserProfile.IUserProfileSchema {
     private final String TAG = "NOWFitness:Database";
 
     private Cursor cursor;
@@ -67,11 +68,18 @@ public class UserProfileDAL extends DBAdapter implements IUserProfile, IUserProf
         return user;
     }
 
+    /**
+     * @param mDb
+     */
     public UserProfileDAL(SQLiteDatabase mDb) {
         super(mDb);
     }
 
-
+    /**
+     * Inserts user to tbuser)profile
+     * @param user
+     * @return
+     */
     @Override
     public boolean insertUser(UserProfile user) {
 
@@ -85,6 +93,11 @@ public class UserProfileDAL extends DBAdapter implements IUserProfile, IUserProf
         }
     }
 
+    /**
+     * Updates the user profile
+     * @param user
+     * @return
+     */
     @Override
     public boolean updateUser(UserProfile user) {
 
@@ -97,6 +110,10 @@ public class UserProfileDAL extends DBAdapter implements IUserProfile, IUserProf
         }
     }
 
+    /**
+     * Finds all users
+     * @return Arraylist of UserProfile entity
+     */
     @Override
     public List<UserProfile> findAll() {
 
@@ -116,6 +133,11 @@ public class UserProfileDAL extends DBAdapter implements IUserProfile, IUserProf
         return userList;
     }
 
+    /**
+     * Finds user based on the supplied user_id
+     * @param id
+     * @return Arraylist of UserProfile entity
+     */
     @Override
     public List<UserProfile> findById(int id) {
         List<UserProfile> userList = new ArrayList<UserProfile>();
@@ -134,6 +156,11 @@ public class UserProfileDAL extends DBAdapter implements IUserProfile, IUserProf
         return userList;
     }
 
+    /**
+     * Finds user based on the supplied name
+     * @param name
+     * @return Arraylist of UserProfile entity
+     */
     @Override
     public List<UserProfile> findByName(String name) {
 
@@ -157,6 +184,10 @@ public class UserProfileDAL extends DBAdapter implements IUserProfile, IUserProf
         return userList;
     }
 
+    /**
+     * Sets the content value
+     * @param user
+     */
     private void setContentValue(UserProfile user) {
 
         initialValues = new ContentValues();
@@ -169,6 +200,10 @@ public class UserProfileDAL extends DBAdapter implements IUserProfile, IUserProf
         initialValues.put("HEIGHT", user.getHeight());
     }
 
+    /**
+     * Retrieves the content value
+     * @return ContentValues
+     */
     private ContentValues getContentValue() {
         return initialValues;
     }

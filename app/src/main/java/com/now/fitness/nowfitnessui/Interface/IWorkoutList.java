@@ -5,7 +5,8 @@ import com.now.fitness.nowfitnessui.Object.WorkoutList;
 import java.util.List;
 
 /**
- * Created by Maycor Gerilla on 5/30/2017.
+ * This class is the interface for the WorkoutList data access layer
+ * @author  Maycor Gerilla on 5/30/2017.
  */
 
 
