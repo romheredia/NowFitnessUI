@@ -7,9 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.now.fitness.nowfitnessui.Interface.IMyWorkout;
-import com.now.fitness.nowfitnessui.Model.DBAdapter;
+import com.now.fitness.nowfitnessui.Model.DBContentProvider;
 import com.now.fitness.nowfitnessui.Object.MyWorkout;
-import com.now.fitness.nowfitnessui.Object.MyWorkoutPlan;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,7 @@ import java.util.List;
  * Created by Rom on 6/06/2017.
  */
 
-public class MyWorkoutDAL extends DBAdapter implements IMyWorkout, IMyWorkout.IMyWorkoutSchema {
+public class MyWorkoutDAL extends DBContentProvider implements IMyWorkout, IMyWorkout.IMyWorkoutSchema {
 
     private final String TAG = "NOWFitness:Database";
 

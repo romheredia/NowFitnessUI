@@ -6,10 +6,8 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.now.fitness.nowfitnessui.Interface.IMyWorkout;
 import com.now.fitness.nowfitnessui.Interface.IMyWorkoutRoutine;
-import com.now.fitness.nowfitnessui.Model.DBAdapter;
-import com.now.fitness.nowfitnessui.Object.MyWorkout;
+import com.now.fitness.nowfitnessui.Model.DBContentProvider;
 import com.now.fitness.nowfitnessui.Object.MyWorkoutRoutine;
 
 import java.util.ArrayList;
@@ -19,7 +17,7 @@ import java.util.List;
  * Created by Rom on 9/06/2017.
  */
 
-public class MyWorkoutRoutineDAL extends DBAdapter implements IMyWorkoutRoutine, IMyWorkoutRoutine.IMyWorkoutRoutineSchema {
+public class MyWorkoutRoutineDAL extends DBContentProvider implements IMyWorkoutRoutine, IMyWorkoutRoutine.IMyWorkoutRoutineSchema {
 
     private final String TAG = "NOWFitness:Database";
 

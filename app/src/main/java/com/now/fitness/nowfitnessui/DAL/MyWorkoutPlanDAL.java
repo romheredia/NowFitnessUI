@@ -7,20 +7,18 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.now.fitness.nowfitnessui.Interface.IMyWorkoutPlan;
-import com.now.fitness.nowfitnessui.Model.DBAdapter;
+import com.now.fitness.nowfitnessui.Model.DBContentProvider;
 import com.now.fitness.nowfitnessui.Object.MyWorkoutPlan;
-import com.now.fitness.nowfitnessui.Object.WorkoutCategory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by Rom on 6/06/2017.
  */
 
-public class MyWorkoutPlanDAL extends DBAdapter implements IMyWorkoutPlan, IMyWorkoutPlan.IMyWorkoutPlanSchema {
+public class MyWorkoutPlanDAL extends DBContentProvider implements IMyWorkoutPlan, IMyWorkoutPlan.IMyWorkoutPlanSchema {
     private final String TAG = "NOWFitness:Database";
 
     private Cursor cursor;
