@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.now.fitness.nowfitnessui"
-    android:versionCode="1"
-    android:versionName="1.0">
+    package="com.now.fitness.nowfitnessui">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -13,7 +11,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/NowTheme">
-
         <activity
             android:name=".Activity.SplashActivity"
             android:theme="@style/NowTheme">
@@ -25,10 +22,12 @@
         </activity>
         <activity android:name=".Activity.UserProfileActivity" />
         <activity android:name=".Activity.MainActivity">
+
         </activity>
-        <activity android:name=".Activity.CreateMyWorkoutActivity"></activity>
-        <activity android:name=".Activity.NowActivity"></activity>
-        <activity android:name=".Activity.NowMainActivity"></activity>
+        <activity android:name=".Activity.CreateMyWorkoutActivity" />
+        <activity android:name=".Activity.MyWorkoutActivity" />
+        <activity android:name=".Activity.MyWorkoutRoutineActivity" />
+        <activity android:name=".Activity.WorkoutListActivity"></activity>
     </application>
 
 </manifest>

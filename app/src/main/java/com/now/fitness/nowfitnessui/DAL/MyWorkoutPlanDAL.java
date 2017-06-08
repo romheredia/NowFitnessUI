@@ -34,6 +34,7 @@ public class MyWorkoutPlanDAL extends DBAdapter implements IMyWorkoutPlan, IMyWo
     public boolean insertMyWorkoutPlan(MyWorkoutPlan myWorkoutPlan) {
         setContentValue(myWorkoutPlan);
         try {
+
             return super.insert(MYWORKOUTPLAN_TABLE, getContentValue()) > 0;
         } catch (SQLiteConstraintException e) {
             Log.d(TAG, "error: " + e.getMessage());
@@ -49,7 +50,7 @@ public class MyWorkoutPlanDAL extends DBAdapter implements IMyWorkoutPlan, IMyWo
     @Override
     public List<MyWorkoutPlan> findAll() {
         List<MyWorkoutPlan> myWorkoutPlanList = new ArrayList<>();
-        cursor = super.query(MYWORKOUTPLAN_TABLE, USER_COLUMNS, null, null, COLUMN_PLAN_ID);
+        cursor = super.query(MYWORKOUTPLAN_TABLE, MYWORKOUTPLAN_COLUMNS, null, null, COLUMN_PLAN_ID);
 
         if (cursor != null) {
             cursor.moveToFirst();

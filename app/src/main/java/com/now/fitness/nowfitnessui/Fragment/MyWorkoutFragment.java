@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
@@ -17,6 +18,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.now.fitness.nowfitnessui.Activity.CreateMyWorkoutActivity;
+import com.now.fitness.nowfitnessui.Activity.MyWorkoutActivity;
 import com.now.fitness.nowfitnessui.Model.Database;
 import com.now.fitness.nowfitnessui.Object.MyWorkoutPlan;
 import com.now.fitness.nowfitnessui.R;
@@ -77,7 +79,7 @@ public class MyWorkoutFragment extends Fragment {
         refreshOnResume = true;
     }
 
-    public void getMyWorkoutPlanList(){
+    public void getMyWorkoutPlanList() {
         try {
             mDb = new Database(getActivity());
             mDb.open();
@@ -93,6 +95,20 @@ public class MyWorkoutFragment extends Fragment {
             }
 
             mDb.close();
+
+            mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
+                    String name = adapterView.getItemAtPosition(i).toString();
+                    int myWorkoutPlanId = (int)adapterView.getItemIdAtPosition(i);
+
+//                    Toast.makeText(getActivity(), String.valueOf(adapterView.getItemIdAtPosition(i)), Toast.LENGTH_LONG).show();
+
+                    Intent myWorkoutActivityIntent = new Intent(getActivity(), MyWorkoutActivity.class);
+                    myWorkoutActivityIntent.putExtra("MyWorkoutPlanId", myWorkoutPlanId);
+                    startActivity(myWorkoutActivityIntent);
+                }
+            });
 
         } catch (Exception e) {
             e.printStackTrace();

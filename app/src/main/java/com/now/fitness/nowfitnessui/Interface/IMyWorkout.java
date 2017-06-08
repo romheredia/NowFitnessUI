@@ -13,26 +13,24 @@ public interface IMyWorkout {
     boolean insertMyWorkout(MyWorkout myWorkout);
     boolean updateMyWorkouts(MyWorkout myWorkout);
     List<MyWorkout> findAll();
+    List<MyWorkout> findByMyWorkoutPlanId(int id);
     List<MyWorkout> findByCode(String code);
     List<MyWorkout> findByName(String name);
 
     interface IMyWorkoutSchema {
-        String MYWORKOUTPLAN_TABLE = "tbmyworkout";
-        String COLUMN_ID = "myworkout__id";
-        String COLUMN_NAME = "myworkout_name";
-        String COLUMN_NUMBEROFWORKOUTS = "number_of_workouts";
-        String MYWORKOUTPLAN_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS "
-                + MYWORKOUTPLAN_TABLE
+        String MYWORKOUT_TABLE = "tbmyworkout";
+        String COLUMN_MYWORKOUT_ID = "myworkout_id";
+        String COLUMN_MYWORKOUT_NAME = "myworkout_name";
+        String COLUMN_PLAN_ID = "myworkout_plan_id";
+        String MYWORKOUT_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS "
+                + MYWORKOUT_TABLE
                 + " ("
-                + COLUMN_ID
-                + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + COLUMN_NAME
-                + " TEXT NOT NULL, "
-                + COLUMN_NUMBEROFWORKOUTS
-                + " INTEGER"
+                + COLUMN_MYWORKOUT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + COLUMN_MYWORKOUT_NAME + " TEXT NOT NULL, "
+                + COLUMN_PLAN_ID + " INTEGER NOT NULL, "
+                + "FOREIGN KEY ("+COLUMN_PLAN_ID+") REFERENCES tbmyworkout_plan(myworkout_plan_id)"
                 + ")";
 
-        String[] USER_COLUMNS = new String[] { COLUMN_ID, COLUMN_NAME,
-                COLUMN_NUMBEROFWORKOUTS};
+        String[] MYWORKOUT_COLUMNS = new String[] { COLUMN_MYWORKOUT_ID, COLUMN_MYWORKOUT_NAME };
     }
 }

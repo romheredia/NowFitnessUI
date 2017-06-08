@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.now.fitness.nowfitnessui.Interface.IWorkoutList;
 import com.now.fitness.nowfitnessui.Model.DBAdapter;
+import com.now.fitness.nowfitnessui.Object.MyWorkout;
 import com.now.fitness.nowfitnessui.Object.WorkoutList;
 
 import java.util.ArrayList;
@@ -80,7 +81,19 @@ public class WorkoutListDAL extends DBAdapter implements IWorkoutList, IWorkoutL
 
     @Override
     public List<WorkoutList> findAll() {
-        return null;
+        List<WorkoutList> workoutList = new ArrayList<>();
+        cursor = super.query(WORKOUTLIST_TABLE, WORKOUTLIST_COLUMNS, null, null, COLUMN_ID);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                WorkoutList workoutListItem = cursorToEntity(cursor);
+                workoutList.add(workoutListItem);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        return workoutList;
     }
 
     @Override

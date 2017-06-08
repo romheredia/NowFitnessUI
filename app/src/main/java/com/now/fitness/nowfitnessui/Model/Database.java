@@ -6,11 +6,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.now.fitness.nowfitnessui.DAL.MyWorkoutDAL;
 import com.now.fitness.nowfitnessui.DAL.MyWorkoutPlanDAL;
+import com.now.fitness.nowfitnessui.DAL.MyWorkoutRoutineDAL;
 import com.now.fitness.nowfitnessui.DAL.UserProfileDAL;
 import com.now.fitness.nowfitnessui.DAL.WorkoutCategoryDAL;
 import com.now.fitness.nowfitnessui.DAL.WorkoutCreatedDAL;
 import com.now.fitness.nowfitnessui.DAL.WorkoutListDAL;
+import com.now.fitness.nowfitnessui.Interface.IMyWorkout;
 import com.now.fitness.nowfitnessui.Interface.IMyWorkoutPlan;
 import com.now.fitness.nowfitnessui.Interface.IUserProfile;
 import com.now.fitness.nowfitnessui.Interface.IWorkoutCategory;
@@ -32,6 +35,8 @@ public class Database {
     public static WorkoutCreatedDAL mWorkoutCreatedDAL;
     public static WorkoutListDAL mWorkoutListDAL;
     public static MyWorkoutPlanDAL mMyWorkoutPlanDAL;
+    public static MyWorkoutDAL mMyWorkoutDAL;
+    public static MyWorkoutRoutineDAL mMyWorkoutRoutineDAL;
     private static final String TAG = "NOWFitness:Database";
 
     public Database(Context context) {
@@ -48,6 +53,7 @@ public class Database {
         mWorkoutCreatedDAL = new WorkoutCreatedDAL(mDb);
         mWorkoutListDAL = new WorkoutListDAL(mDb);
         mMyWorkoutPlanDAL = new MyWorkoutPlanDAL(mDb);
+        mMyWorkoutDAL = new MyWorkoutDAL(mDb);
 
         return this;
     }
@@ -70,6 +76,7 @@ public class Database {
             db.execSQL(IWorkoutCreated.IWorkoutCreatedSchema.WORKOUTCREATED_TABLE_CREATE);
             db.execSQL(IWorkoutList.IWorkoutListSchema.WORKOUTLIST_TABLE_CREATE);
             db.execSQL(IMyWorkoutPlan.IMyWorkoutPlanSchema.MYWORKOUTPLAN_TABLE_CREATE);
+            db.execSQL(IMyWorkout.IMyWorkoutSchema.MYWORKOUT_TABLE_CREATE);
 
             Log.i(TAG, "populate table");
             db.execSQL(IWorkoutCategory.IWorkoutCategorySchema.POPULATE_TABLE);
@@ -93,6 +100,8 @@ public class Database {
                     + IWorkoutList.IWorkoutListSchema.WORKOUTLIST_TABLE_CREATE);
             db.execSQL("DROP TABLE IF EXISTS "
                     + IMyWorkoutPlan.IMyWorkoutPlanSchema.MYWORKOUTPLAN_TABLE_CREATE);
+            db.execSQL("DROP TABLE IF EXISTS "
+                    + IMyWorkout.IMyWorkoutSchema.MYWORKOUT_TABLE_CREATE);
             onCreate(db);
         }
     }

@@ -32,7 +32,7 @@ public interface IMyWorkoutPlan {
                 + " INTEGER"
                 + ")";
 
-        String[] USER_COLUMNS = new String[] { COLUMN_PLAN_ID, COLUMN_PLAN_NAME,
+        String[] MYWORKOUTPLAN_COLUMNS = new String[] { COLUMN_PLAN_ID, COLUMN_PLAN_NAME,
                 COLUMN_NUMBEROFWORKOUTS};
     }
 }

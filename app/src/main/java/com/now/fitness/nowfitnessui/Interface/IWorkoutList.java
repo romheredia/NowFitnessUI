@@ -67,7 +67,7 @@ public interface IWorkoutList {
                 "('Up Down Push Ups',103,20,'Y'),\n" +
                 "('Moutain Climbers',107,30,'Z');";
 
-                String[] USER_COLUMNS = new String[] { COLUMN_ID,
+                String[] WORKOUTLIST_COLUMNS = new String[] { COLUMN_ID,
                 COLUMN_NAME, COLUMN_CATEGORY, COLUMN_REPS, COLUMN_TAG};
     }
 }
