@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.now.fitness.nowfitnessui.Model.Database;
@@ -33,14 +34,15 @@ public class UserProfileActivity extends AppCompatActivity {
     private String lastname;
     private String gender;
     private String userId;
-    public static Database mDb;
-    String stringdouble = "";
+    private Database mDb;
+    private String stringdouble = "";
+    private TextView textView;
 
     int duration = Toast.LENGTH_LONG;
 
     /**
      * Creates the view for UserProfileActivity
-     * @param savedInstanceState
+     * @param savedInstanceState Bundle
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +71,8 @@ public class UserProfileActivity extends AppCompatActivity {
                 List<UserProfile> usr = Database.mUserDAL.findById(Integer.parseInt(userId));
                 UserProfile user = usr.get(0);
 
-                mFnameTextView.setText(user.getFirstname().toString());
-                mLnameTextView.setText(user.getLastname().toString());
+                mFnameTextView.setText(user.getFirstname());
+                mLnameTextView.setText(user.getLastname());
 
                 stringdouble = Double.toString(user.getHeight());
                 Log.i(TAG,"USER PROFILE ACTIVITY: height = "+stringdouble);
@@ -99,16 +101,18 @@ public class UserProfileActivity extends AppCompatActivity {
 
     /**
      *  Retrieves the user input from the View
-     *  @param view
+     *  @param view View
      */
 
     public void onClick_UserProfileDone(View view) {
         int flag = 0;
+        String regexStr = "^[1-9]\\d*(\\.\\d+)?$";
         //get value of editText
         mFnameTextView = (EditText) findViewById(R.id.editText_FirstName);
         mLnameTextView = (EditText) findViewById(R.id.editText_LastName);
         mHeightTextView = (EditText) findViewById(R.id.editText_Height);
         mWeightTextView = (EditText) findViewById(R.id.editText_Weight);
+        mRadioGroup = (RadioGroup) findViewById(R.id.radioGroupGender);
 
         //perform validation for required fields firstname and lastname
         if( mFnameTextView.getText().toString().length() == 0 ) {
@@ -126,18 +130,30 @@ public class UserProfileActivity extends AppCompatActivity {
             flag++;
         }
 
+        textView = (TextView) findViewById(R.id.textView_Gender);
+        if(mRadioGroup.getCheckedRadioButtonId()<0){
+            textView.setError("Please a gender");
+            flag++;
+        }
+
         //perform validation for height and weight input
-        if(Pattern.matches("[a-zA-Z]+", mHeightTextView.getText().toString())) {
+        try {
+            double h = Double.parseDouble(mHeightTextView.getText().toString());
+        } catch (NumberFormatException e) {
+           flag++;
             mHeightTextView.setError("Incorrect input!");
-            flag++;
         }
 
-        if(Pattern.matches("[a-zA-Z]+", mWeightTextView.getText().toString())) {
+        try {
+            double w = Double.parseDouble(mWeightTextView.getText().toString());
+        } catch (NumberFormatException e) {
+            flag++;
             mWeightTextView.setError("Incorrect input!");
-            flag++;
         }
 
 
+        //Passed the validation
+        if(flag == 0) {
         //store data in entity
         UserProfile user = new UserProfile();
         user.setFirstname(mFnameTextView.getText().toString());
@@ -146,24 +162,23 @@ public class UserProfileActivity extends AppCompatActivity {
         user.setHeight(Double.parseDouble(mHeightTextView.getText().toString()));
         user.setGender(gender);
 
-        //call DAO object
-        //check if user already exists or not
-        try{
-            //List<UserProfile> usr = Database.mUserDao.findById(Integer.parseInt(userId));
 
+        try{
+            //call DAO object
+            //check if user already exists or not
            if(userId!=null){
                 boolean isUpdated = Database.mUserDAL.updateUser(user);
 
                 if(isUpdated){
-                    Toast.makeText(this, R.string.prompt_success, duration).show();
+                    Toast.makeText(this, R.string.prompt_success_update, duration).show();
                 }
 
             }else{
                boolean isInserted = Database.mUserDAL.insertUser(user);
                if(isInserted){
-                   Toast.makeText(this, R.string.prompt_success, duration).show();
+                   Toast.makeText(this, R.string.prompt_success_insert, duration).show();
                }
-               List<UserProfile> usr = Database.mUserDAL.findByName(user.getFirstname().toString());
+               List<UserProfile> usr = Database.mUserDAL.findByName(user.getFirstname());
                UserProfile usrObj = usr.get(0);
                 firstname = usrObj.getFirstname();
                 lastname = usrObj.getLastname();
@@ -178,7 +193,7 @@ public class UserProfileActivity extends AppCompatActivity {
         intent.putExtra("lastname", lastname);
         intent.putExtra("userId", userId);
 
-        if(flag == 0) {
+
             startActivity(intent);
             finish();
             mDb.close();
@@ -187,7 +202,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
     /**
      * Tags the radio button checked
-     * @param view
+     * @param view View
      */
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?

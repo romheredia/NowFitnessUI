@@ -24,7 +24,7 @@ public class NowMainActivity extends AppCompatActivity {
 
     /**
     * Creates the View for the NowMainActivity
-     * @param savedInstanceState
+     * @param savedInstanceState Bundle
     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,11 +55,11 @@ public class NowMainActivity extends AppCompatActivity {
         //populate workout repetitions
         for(int i=0, x=0; i<generated.size(); i=i+2, x++) {
             textViewReps[x] = new TextView(this);
-            textViewReps[x].setText(R.string.text_view_reps+""+generated.get(i+1));
+            textViewReps[x].setText(getString(R.string.text_view_reps).concat(generated.get(i + 1)));
             TextViewCompat.setTextAppearance(textViewReps[x], R.style.TextAppearance_AppCompat_Large);
         }
 
-            //populate textView with values from ArrayList
+        //populate textView with values from ArrayList
         for(int i=0; i<size; i++) {
             TextView blankText = new TextView(this);
             blankText.setText(" ");
