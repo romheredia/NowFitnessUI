@@ -15,12 +15,4 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <Button
-        android:id="@+id/GenerateWorkout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/NowWorkout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="67dp"
-        android:text="@string/button_generate" />
 </RelativeLayout>

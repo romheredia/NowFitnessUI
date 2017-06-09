@@ -28,6 +28,8 @@
         <activity android:name=".Activity.MyWorkoutActivity" />
         <activity android:name=".Activity.MyWorkoutRoutineActivity" />
         <activity android:name=".Activity.WorkoutListActivity"></activity>
+        <activity android:name=".Activity.NowActivity"></activity>
+        <activity android:name=".Activity.NowMainActivity"></activity>
     </application>
 
 </manifest>

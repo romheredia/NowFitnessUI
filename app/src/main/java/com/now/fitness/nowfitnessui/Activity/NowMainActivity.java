@@ -1,13 +1,15 @@
 package com.now.fitness.nowfitnessui.Activity;
 
 import android.os.Bundle;
+import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.now.fitness.nowfitnessui.R;
-
 import java.util.ArrayList;
 
 /**
@@ -38,13 +40,40 @@ public class NowMainActivity extends AppCompatActivity {
 
         linearLayout = (LinearLayout) findViewById(R.id.linearLayoutNOW);
 
-        //populate textView with values from ArrayList
-        for(int i=0; i<generated.size(); i=i+2) {
-            TextView textView = new TextView(this);
-            textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            textView.setText(generated.get(i)+"         Repetitions: "+generated.get(i+1));
-            linearLayout.addView(textView);
+        int size = generated.size()/2;
+
+        TextView textViewWork[] = new TextView[generated.size()];
+        TextView textViewReps[] = new TextView[generated.size()];
+
+        //populate workout name
+        for(int i=0, x=0; i<generated.size(); i=i+2, x++){
+            textViewWork[x] = new TextView(this);
+            textViewWork[x].setText(generated.get(i));
+            TextViewCompat.setTextAppearance(textViewWork[x], R.style.TextAppearance_AppCompat_Large);
+        }
+
+        //populate workout repetitions
+        for(int i=0, x=0; i<generated.size(); i=i+2, x++) {
+            textViewReps[x] = new TextView(this);
+            textViewReps[x].setText(R.string.text_view_reps+""+generated.get(i+1));
+            TextViewCompat.setTextAppearance(textViewReps[x], R.style.TextAppearance_AppCompat_Large);
+        }
+
+            //populate textView with values from ArrayList
+        for(int i=0; i<size; i++) {
+            TextView blankText = new TextView(this);
+            blankText.setText(" ");
+
+            linearLayout.addView(textViewWork[i]);
+            linearLayout.addView(textViewReps[i]);
+            linearLayout.addView(blankText);
         }
 
     }
+
+    public void onClick_DoneWorkout(View view){
+        Toast.makeText(this, R.string.prompt_done, Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
 }

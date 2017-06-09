@@ -44,12 +44,12 @@ public class NowFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-// Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_now, container, false);
-        context = view.getContext();
+        // Inflate the layout for this fragment
+        mView = inflater.inflate(R.layout.fragment_now, container, false);
+        context = mView.getContext();
 
         //calls the Name Your Workout activity
-        button = (Button) view.findViewById(R.id.NowWorkout);
+        button = (Button) mView.findViewById(R.id.NowWorkout);
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -57,6 +57,7 @@ public class NowFragment extends Fragment {
             }
         });
 
-        return view;
+        return mView;
     }
+
 }
