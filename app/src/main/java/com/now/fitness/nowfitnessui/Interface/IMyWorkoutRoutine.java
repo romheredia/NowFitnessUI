@@ -19,14 +19,17 @@ public interface IMyWorkoutRoutine {
     interface IMyWorkoutRoutineSchema {
         String MYWORKOUTROUTINE_TABLE = "tbmyworkout";
         String COLUMN_ROUTINE_ID = "myworkout_routine_id";
+        String COLUMN_PLAN_ID = "myworkout_plan_id";
         String COLUMN_MYWORKOUT_ID = "myworkout_id";
         String COLUMN_ID = "workout_id";
         String MYWORKOUTROUTINE_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS "
                 + MYWORKOUTROUTINE_TABLE
                 + " ("
                 + COLUMN_ROUTINE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + COLUMN_PLAN_ID + " INTEGER NOT NULL, "
                 + COLUMN_MYWORKOUT_ID + " INTEGER NOT NULL, "
                 + COLUMN_ID + " INTEGER NOT NULL, "
+                + "FOREIGN KEY ("+COLUMN_PLAN_ID+") REFERENCES tbmyworkout_plan(myworkout_plan_id) "
                 + "FOREIGN KEY ("+COLUMN_MYWORKOUT_ID+") REFERENCES tbmyworkout(myworkout_id) "
                 + "FOREIGN KEY ("+COLUMN_ID+") REFERENCES tbworkout_list(workout_id) "
                 + ")";
