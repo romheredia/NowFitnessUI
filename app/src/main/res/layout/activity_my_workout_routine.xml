@@ -7,6 +7,12 @@
     tools:context="com.now.fitness.nowfitnessui.Activity.MyWorkoutRoutineActivity"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Workout Routine"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
     <ListView
         android:id="@+id/listView_MyWorkoutRoutine"
         android:layout_width="match_parent"

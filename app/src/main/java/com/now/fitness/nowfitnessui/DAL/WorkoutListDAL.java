@@ -8,6 +8,8 @@ import android.util.Log;
 
 import com.now.fitness.nowfitnessui.Interface.IWorkoutList;
 import com.now.fitness.nowfitnessui.Model.DBContentProvider;
+import com.now.fitness.nowfitnessui.Object.MyWorkout;
+import com.now.fitness.nowfitnessui.Object.MyWorkoutPlan;
 import com.now.fitness.nowfitnessui.Object.WorkoutList;
 
 import java.util.ArrayList;
@@ -91,6 +93,43 @@ public class WorkoutListDAL extends DBContentProvider implements IWorkoutList, I
 
     @Override
     public List<WorkoutList> findAll() {
+        List<WorkoutList> workoutLists = new ArrayList<>();
+        cursor = super.query(WORKOUTLIST_TABLE, WORKOUTLIST_COLUMNS, null, null, COLUMN_ID);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                WorkoutList workoutListItem = cursorToEntity(cursor);
+                workoutLists.add(workoutListItem);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        return workoutLists;
+    }
+
+    @Override
+    public List<WorkoutList> findByWorkoutId(int workoutId) {
+        List<WorkoutList> workoutList = new ArrayList<>();
+        cursor = rawQuery("SELECT workout_id, name, category_id from tbworkout_list where workout_id = ?", new String[] {(String.valueOf(workoutId))});
+        Log.i(TAG, "plan id: "+workoutId);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+            Log.i("CURSOR","here");
+            while (!cursor.isAfterLast()) {
+                Log.i("CURSOR","Not null");
+                WorkoutList workoutListItem = cursorToEntity(cursor);
+                workoutList.add(workoutListItem);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+
+        return workoutList;
+    }
+
+    public List<WorkoutList> findByWorkoutId(String category) {
         return null;
     }
 

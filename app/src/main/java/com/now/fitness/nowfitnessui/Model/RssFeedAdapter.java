@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.now.fitness.nowfitnessui.Object.RssFeedItem;
 import com.now.fitness.nowfitnessui.R;
@@ -64,6 +65,7 @@ public class RssFeedAdapter extends RecyclerView.Adapter<RssFeedAdapter.RssFeedV
             titleImage = ((ImageView) rssFeedItemView.findViewById(R.id.imageView_TitleImage));
 //            pubDate = ((TextView) rssFeedItemView.findViewById(R.id.textView_PubDate));
             cardView = (CardView) rssFeedItemView.findViewById(R.id.cardView);
+
         }
     }
 }

@@ -63,6 +63,8 @@ public class CreateMyWorkoutActivity extends AppCompatActivity {
 
                 mDb.close();
 
+
+
                 mDb.open();
                 int myWorkoutPlanId = Database.mMyWorkoutPlanDAL.findAll().size() - 1;
 
@@ -70,15 +72,15 @@ public class CreateMyWorkoutActivity extends AppCompatActivity {
                     //Store values to entities of myWorkout
                     myWorkout.setMyWorkoutName(planName + " " + (i + 1));
                     Log.d("Workout Name:", planName + " " + (i + 1));
-                    myWorkout.setMyWorkoutPlanId(myWorkoutPlanId);
-                    Log.d("Workout Plan Id:", String.valueOf(myWorkoutPlanId));
+                    myWorkout.setMyWorkoutPlanId(myWorkoutPlanId + 1);
+                    Log.d("Workout Plan Id:", String.valueOf(myWorkoutPlanId) + 1);
 
                     Database.mMyWorkoutDAL.insertMyWorkout(myWorkout);
                 }
 
+                mDb.close();
                 finish();
 
-                mDb.close();
             }
         });
     }

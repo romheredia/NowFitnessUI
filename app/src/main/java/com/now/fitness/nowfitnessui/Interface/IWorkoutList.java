@@ -13,6 +13,7 @@ import java.util.List;
 public interface IWorkoutList {
     boolean insertExercise(WorkoutList lst);
     List<WorkoutList> findAll();
+    List<WorkoutList> findByWorkoutId(int workoutId);
     List<WorkoutList> findByCategory(String category);
     List<WorkoutList> findByName(String name);
 

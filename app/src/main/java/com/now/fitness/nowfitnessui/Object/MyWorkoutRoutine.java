@@ -11,6 +11,8 @@ public class MyWorkoutRoutine {
     private int myWorkoutId;
     private int workoutId;
 
+    private String workoutName;
+
     public int getMyWorkoutRoutineId() {
         return myWorkoutRoutineId;
     }
@@ -41,5 +43,13 @@ public class MyWorkoutRoutine {
 
     public void setWorkoutId(int workoutId) {
         this.workoutId = workoutId;
+    }
+
+    public String getWorkoutName() {
+        return workoutName;
+    }
+
+    public void setWorkoutName(String workoutName) {
+        this.workoutName = workoutName;
     }
 }

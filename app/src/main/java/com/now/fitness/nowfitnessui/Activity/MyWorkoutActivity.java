@@ -19,7 +19,7 @@ import com.now.fitness.nowfitnessui.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyWorkoutActivity extends AppCompatActivity {
+public class  MyWorkoutActivity extends AppCompatActivity {
 
     private ListView mListView;
     Database mDb;
@@ -44,11 +44,13 @@ public class MyWorkoutActivity extends AppCompatActivity {
             mDb = new Database(this);
             mDb.open();
 
-            List<MyWorkout> myWorkoutList = Database.mMyWorkoutDAL.findByMyWorkoutPlanId(myWorkoutPlanId);
+            final List<MyWorkout> myWorkoutList = Database.mMyWorkoutDAL.findByMyWorkoutPlanId(myWorkoutPlanId);
             ArrayList<String> nameList = new ArrayList<>();
 
             for (int i = 0; i < myWorkoutList.size(); i++) {
-                nameList.add(String.valueOf(myWorkoutList.get(i).getMyWorkoutName()));
+                String idName = String.valueOf(myWorkoutList.get(i).getMyWorkoutId()) + " " + myWorkoutList.get(i).getMyWorkoutName().toString();
+                String myWorkoutName = myWorkoutList.get(i).getMyWorkoutName();
+                nameList.add(myWorkoutName);
 
                 ListAdapter listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nameList);
                 mListView.setAdapter(listAdapter);
@@ -59,17 +61,16 @@ public class MyWorkoutActivity extends AppCompatActivity {
             mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
-                    String name = adapterView.getItemAtPosition(i).toString();
-                    int myWorkoutId = (int)adapterView.getItemIdAtPosition(i);
+                    int myWorkoutId = myWorkoutList.get(i).getMyWorkoutId();
 
-//                    Toast.makeText(MyWorkoutActivity.this, String.valueOf(adapterView.getItemIdAtPosition(i)), Toast.LENGTH_LONG).show();
                     Intent myWorkoutActivityIntent = new Intent(MyWorkoutActivity.this, MyWorkoutRoutineActivity.class);
 
                     myWorkoutActivityIntent.putExtra("MyWorkoutPlanId", myWorkoutPlanId);
-//                    Log.i("Workout Plan Id:", String.valueOf(myWorkoutPlanId));
                     myWorkoutActivityIntent.putExtra("MyWorkoutId", myWorkoutId);
-//                    Log.i("Workout Id:", String.valueOf(adapterView.getItemIdAtPosition(i)));
+                    Log.i("Workout Plan Id:", String.valueOf(myWorkoutPlanId));
+                    Log.i("My Workout Id:", String.valueOf(myWorkoutId));
 
+                    Toast.makeText(MyWorkoutActivity.this, String.valueOf(myWorkoutId), Toast.LENGTH_LONG).show();
                     startActivity(myWorkoutActivityIntent);
                 }
             });

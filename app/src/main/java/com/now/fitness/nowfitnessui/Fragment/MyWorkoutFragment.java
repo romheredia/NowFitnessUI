@@ -84,11 +84,13 @@ public class MyWorkoutFragment extends Fragment {
             mDb = new Database(getActivity());
             mDb.open();
 
-            List<MyWorkoutPlan> myWorkoutPlanList = Database.mMyWorkoutPlanDAL.findAll();
+            final List<MyWorkoutPlan> myWorkoutPlanList = Database.mMyWorkoutPlanDAL.findAll();
             ArrayList<String> nameList = new ArrayList<>();
 
             for (int i = 0; i < myWorkoutPlanList.size(); i++) {
-                nameList.add(myWorkoutPlanList.get(i).getMyWorkoutPlanName().toString());
+                String idName =  String.valueOf(myWorkoutPlanList.get(i).getMyWorkoutPlanId()) + " " + myWorkoutPlanList.get(i).getMyWorkoutPlanName().toString();
+                String myWorkoutPlanName =  myWorkoutPlanList.get(i).getMyWorkoutPlanName();
+                nameList.add(myWorkoutPlanName);
 
                 ListAdapter listAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, nameList);
                 mListView.setAdapter(listAdapter);
@@ -99,13 +101,14 @@ public class MyWorkoutFragment extends Fragment {
             mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
-                    String name = adapterView.getItemAtPosition(i).toString();
-                    int myWorkoutPlanId = (int)adapterView.getItemIdAtPosition(i);
-
-//                    Toast.makeText(getActivity(), String.valueOf(adapterView.getItemIdAtPosition(i)), Toast.LENGTH_LONG).show();
+                    //Get Id for MyWorkoutPlan
+                    int myWorkoutPlanId = myWorkoutPlanList.get(i).getMyWorkoutPlanId();
 
                     Intent myWorkoutActivityIntent = new Intent(getActivity(), MyWorkoutActivity.class);
                     myWorkoutActivityIntent.putExtra("MyWorkoutPlanId", myWorkoutPlanId);
+                    Log.d("My Workout Plan ID: ", String.valueOf(myWorkoutPlanId));
+
+//                    Toast.makeText(getActivity(), String.valueOf(myWorkoutPlanId), Toast.LENGTH_LONG).show();
                     startActivity(myWorkoutActivityIntent);
                 }
             });

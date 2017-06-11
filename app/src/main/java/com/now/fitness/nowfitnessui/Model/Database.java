@@ -15,11 +15,11 @@ import com.now.fitness.nowfitnessui.DAL.WorkoutCreatedDAL;
 import com.now.fitness.nowfitnessui.DAL.WorkoutListDAL;
 import com.now.fitness.nowfitnessui.Interface.IMyWorkout;
 import com.now.fitness.nowfitnessui.Interface.IMyWorkoutPlan;
+import com.now.fitness.nowfitnessui.Interface.IMyWorkoutRoutine;
 import com.now.fitness.nowfitnessui.Interface.IUserProfile;
 import com.now.fitness.nowfitnessui.Interface.IWorkoutCategory;
 import com.now.fitness.nowfitnessui.Interface.IWorkoutCreated;
 import com.now.fitness.nowfitnessui.Interface.IWorkoutList;
-import com.now.fitness.nowfitnessui.Object.MyWorkoutPlan;
 
 /**
  * This class is responsible  for Database and table creation
@@ -55,6 +55,7 @@ public class Database {
         mWorkoutListDAL = new WorkoutListDAL(mDb);
         mMyWorkoutPlanDAL = new MyWorkoutPlanDAL(mDb);
         mMyWorkoutDAL = new MyWorkoutDAL(mDb);
+        mMyWorkoutRoutineDAL = new MyWorkoutRoutineDAL(mDb);
 
         return this;
     }
@@ -78,6 +79,7 @@ public class Database {
             db.execSQL(IWorkoutList.IWorkoutListSchema.WORKOUTLIST_TABLE_CREATE);
             db.execSQL(IMyWorkoutPlan.IMyWorkoutPlanSchema.MYWORKOUTPLAN_TABLE_CREATE);
             db.execSQL(IMyWorkout.IMyWorkoutSchema.MYWORKOUT_TABLE_CREATE);
+            db.execSQL(IMyWorkoutRoutine.IMyWorkoutRoutineSchema.MYWORKOUTROUTINE_TABLE_CREATE);
 
             Log.i(TAG, "populate table");
             db.execSQL(IWorkoutCategory.IWorkoutCategorySchema.POPULATE_TABLE);
@@ -103,6 +105,8 @@ public class Database {
                     + IMyWorkoutPlan.IMyWorkoutPlanSchema.MYWORKOUTPLAN_TABLE_CREATE);
             db.execSQL("DROP TABLE IF EXISTS "
                     + IMyWorkout.IMyWorkoutSchema.MYWORKOUT_TABLE_CREATE);
+            db.execSQL("DROP TABLE IF EXISTS "
+                    + IMyWorkoutRoutine.IMyWorkoutRoutineSchema.MYWORKOUTROUTINE_TABLE_CREATE);
             onCreate(db);
         }
     }
