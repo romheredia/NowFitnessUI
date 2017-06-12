@@ -1,12 +1,15 @@
 package com.now.fitness.nowfitnessui.Model;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,13 +44,23 @@ public class RssFeedAdapter extends RecyclerView.Adapter<RssFeedAdapter.RssFeedV
 
     @Override
     public void onBindViewHolder(RssFeedViewHolder holder, int position) {
-        RssFeedItem rssFeedItem = mRssFeedItems.get(position);
+        final RssFeedItem rssFeedItem = mRssFeedItems.get(position);
 
         holder.titleText.setText(rssFeedItem.getTitle());
         holder.titleText.setText(rssFeedItem.getTitle());
         holder.titleDescription.setText(rssFeedItem.getDescription());
         Picasso.with(mContext).load(rssFeedItem.getImageUrl()).into(holder.titleImage);
 //        holder.pubDate.setText(rssFeedItem.getPubDate());
+
+        holder.newsItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(mContext, rssFeedItem.getLink(), Toast.LENGTH_LONG).show();
+                Uri uriUrl = Uri.parse(rssFeedItem.getLink());
+                Intent openBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                mContext.startActivity(openBrowser);
+            }
+        });
     }
 
     @Override
@@ -56,6 +69,7 @@ public class RssFeedAdapter extends RecyclerView.Adapter<RssFeedAdapter.RssFeedV
     public class RssFeedViewHolder extends RecyclerView.ViewHolder {
         private TextView titleText, titleDescription, pubDate;
         private ImageView titleImage;
+        private RelativeLayout newsItem;
         private CardView cardView;
 
         public RssFeedViewHolder(View rssFeedItemView) {
@@ -65,6 +79,7 @@ public class RssFeedAdapter extends RecyclerView.Adapter<RssFeedAdapter.RssFeedV
             titleImage = ((ImageView) rssFeedItemView.findViewById(R.id.imageView_TitleImage));
 //            pubDate = ((TextView) rssFeedItemView.findViewById(R.id.textView_PubDate));
             cardView = (CardView) rssFeedItemView.findViewById(R.id.cardView);
+            newsItem = (RelativeLayout) rssFeedItemView.findViewById(R.id.relativeLayout_NewsItem);
 
         }
     }
