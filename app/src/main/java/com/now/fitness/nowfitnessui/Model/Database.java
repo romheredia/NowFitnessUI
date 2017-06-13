@@ -11,14 +11,12 @@ import com.now.fitness.nowfitnessui.DAL.MyWorkoutPlanDAL;
 import com.now.fitness.nowfitnessui.DAL.MyWorkoutRoutineDAL;
 import com.now.fitness.nowfitnessui.DAL.UserProfileDAL;
 import com.now.fitness.nowfitnessui.DAL.WorkoutCategoryDAL;
-import com.now.fitness.nowfitnessui.DAL.WorkoutCreatedDAL;
 import com.now.fitness.nowfitnessui.DAL.WorkoutListDAL;
 import com.now.fitness.nowfitnessui.Interface.IMyWorkout;
 import com.now.fitness.nowfitnessui.Interface.IMyWorkoutPlan;
 import com.now.fitness.nowfitnessui.Interface.IMyWorkoutRoutine;
 import com.now.fitness.nowfitnessui.Interface.IUserProfile;
 import com.now.fitness.nowfitnessui.Interface.IWorkoutCategory;
-import com.now.fitness.nowfitnessui.Interface.IWorkoutCreated;
 import com.now.fitness.nowfitnessui.Interface.IWorkoutList;
 
 /**
@@ -33,7 +31,6 @@ public class Database {
     private final Context mContext;
     public static UserProfileDAL mUserDAL;
     public static WorkoutCategoryDAL mWorkoutCategoryDAL;
-    public static WorkoutCreatedDAL mWorkoutCreatedDAL;
     public static WorkoutListDAL mWorkoutListDAL;
     public static MyWorkoutPlanDAL mMyWorkoutPlanDAL;
     public static MyWorkoutDAL mMyWorkoutDAL;
@@ -51,7 +48,6 @@ public class Database {
         Log.i(TAG, "Open DB");
         mUserDAL = new UserProfileDAL(mDb);
         mWorkoutCategoryDAL = new WorkoutCategoryDAL(mDb);
-        mWorkoutCreatedDAL = new WorkoutCreatedDAL(mDb);
         mWorkoutListDAL = new WorkoutListDAL(mDb);
         mMyWorkoutPlanDAL = new MyWorkoutPlanDAL(mDb);
         mMyWorkoutDAL = new MyWorkoutDAL(mDb);
@@ -75,7 +71,6 @@ public class Database {
             Log.i(TAG, "tables created");
             db.execSQL(IUserProfile.IUserProfileSchema.USER_TABLE_CREATE);
             db.execSQL(IWorkoutCategory.IWorkoutCategorySchema.WORKOUTCAT_TABLE_CREATE);
-            db.execSQL(IWorkoutCreated.IWorkoutCreatedSchema.WORKOUTCREATED_TABLE_CREATE);
             db.execSQL(IWorkoutList.IWorkoutListSchema.WORKOUTLIST_TABLE_CREATE);
             db.execSQL(IMyWorkoutPlan.IMyWorkoutPlanSchema.MYWORKOUTPLAN_TABLE_CREATE);
             db.execSQL(IMyWorkout.IMyWorkoutSchema.MYWORKOUT_TABLE_CREATE);
@@ -97,8 +92,6 @@ public class Database {
                     + IUserProfile.IUserProfileSchema.USER_TABLE);
             db.execSQL("DROP TABLE IF EXISTS "
                     + IWorkoutCategory.IWorkoutCategorySchema.WORKOUTCAT_TABLE_CREATE);
-            db.execSQL("DROP TABLE IF EXISTS "
-                    + IWorkoutCreated.IWorkoutCreatedSchema.WORKOUTCREATED_TABLE_CREATE);
             db.execSQL("DROP TABLE IF EXISTS "
                     + IWorkoutList.IWorkoutListSchema.WORKOUTLIST_TABLE_CREATE);
             db.execSQL("DROP TABLE IF EXISTS "
