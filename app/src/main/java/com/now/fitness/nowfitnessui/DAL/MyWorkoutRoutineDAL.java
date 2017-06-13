@@ -165,7 +165,7 @@ public class MyWorkoutRoutineDAL extends DBContentProvider implements IMyWorkout
         initialValues.put("myworkout_plan_id", myWorkoutRoutine.getMyWorkoutPlanId());
         initialValues.put("myworkout_id", myWorkoutRoutine.getMyWorkoutId());
         initialValues.put("workout_id", myWorkoutRoutine.getWorkoutId());
-        initialValues.put("name", myWorkoutRoutine.getWorkoutName());
+//        initialValues.put("name", myWorkoutRoutine.getWorkoutName());
     }
 
     private ContentValues getContentValue() {

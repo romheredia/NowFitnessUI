@@ -87,9 +87,9 @@ public class WorkoutListActivity extends AppCompatActivity {
                     myWorkoutId = receivedIntent.getIntExtra("MyWorkoutId", -1);
                     workoutId = Integer.parseInt(idList.get(i));
 
-//                    Log.d("Workout Plan Id:", String.valueOf(myWorkoutPlanId));
-//                    Log.d("MyWorkout Id:", String.valueOf(myWorkoutId));
-//                    Log.d("Workout Id:", String.valueOf(workoutId));
+                    Log.d("Workout Plan Id:", String.valueOf(myWorkoutPlanId));
+                    Log.d("MyWorkout Id:", String.valueOf(myWorkoutId));
+                    Log.d("Workout Id:", String.valueOf(workoutId));
 
                     mDb.open();
                     myWorkoutRoutine.setMyWorkoutPlanId(myWorkoutPlanId);

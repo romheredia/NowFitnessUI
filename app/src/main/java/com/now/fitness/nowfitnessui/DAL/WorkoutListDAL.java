@@ -129,10 +129,6 @@ public class WorkoutListDAL extends DBContentProvider implements IWorkoutList, I
         return workoutList;
     }
 
-    public List<WorkoutList> findByWorkoutId(String category) {
-        return null;
-    }
-
     @Override
     public List<WorkoutList> findByCategory(String category) {
         return null;
