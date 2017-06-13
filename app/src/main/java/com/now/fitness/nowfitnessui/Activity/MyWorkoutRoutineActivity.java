@@ -1,8 +1,10 @@
 package com.now.fitness.nowfitnessui.Activity;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -22,9 +24,12 @@ import java.util.List;
 
 public class MyWorkoutRoutineActivity extends AppCompatActivity {
 
+    private Toolbar mToolbar;
+    private ActionBar mActionBar;
     private ListView mListView;
     private Button mButton;
 
+    private String myWorkoutRoutineName;
     private int myWorkoutPlanId;
     private int myWorkoutId;
 
@@ -36,6 +41,15 @@ public class MyWorkoutRoutineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_workout_routine);
 
+
+        mToolbar = (Toolbar) findViewById(R.id.toolbar_MyWorkout);
+        setSupportActionBar(mToolbar);
+
+        mActionBar = getSupportActionBar();
+
+        mActionBar.setDisplayHomeAsUpEnabled(true);
+        mActionBar.setHomeButtonEnabled(true);
+
         mListView = (ListView) findViewById(R.id.listView_MyWorkoutRoutine);
         mButton = (Button) findViewById(R.id.button_AddWorkoutRoutine);
 
@@ -44,9 +58,11 @@ public class MyWorkoutRoutineActivity extends AppCompatActivity {
         Intent receivedIntent = getIntent();
 
         //now get the itemID we passed as an extra
+        myWorkoutRoutineName = receivedIntent.getStringExtra("MyWorkoutRoutineName");
         myWorkoutPlanId = receivedIntent.getIntExtra("MyWorkoutPlanId", -1);
         myWorkoutId = receivedIntent.getIntExtra("MyWorkoutId", -1);
 
+        setTitle(myWorkoutRoutineName);
         getWorkoutRoutineList();
 
         mButton.setOnClickListener(new View.OnClickListener() {

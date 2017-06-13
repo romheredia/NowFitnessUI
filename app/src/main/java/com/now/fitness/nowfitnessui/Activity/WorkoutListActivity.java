@@ -2,8 +2,10 @@ package com.now.fitness.nowfitnessui.Activity;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,6 +26,8 @@ import java.util.List;
 public class WorkoutListActivity extends AppCompatActivity {
 
     private ListView mListView;
+    private Toolbar mToolbar;
+    private ActionBar mActionBar;
     Database mDb;
     MyWorkoutRoutine myWorkoutRoutine;
     private int myWorkoutPlanId;
@@ -34,6 +38,16 @@ public class WorkoutListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout_list);
+        setTitle("Workout List");
+
+        mToolbar = (Toolbar) findViewById(R.id.toolbar_WorkoutList);
+        setSupportActionBar(mToolbar);
+
+        mActionBar = getSupportActionBar();
+
+        mActionBar.setDisplayHomeAsUpEnabled(true);
+        mActionBar.setHomeButtonEnabled(true);
+
 
         myWorkoutRoutine = new MyWorkoutRoutine();
         mListView = (ListView) findViewById(R.id.listView_WorkoutList);

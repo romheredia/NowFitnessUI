@@ -1,8 +1,10 @@
 package com.now.fitness.nowfitnessui.Activity;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,7 +15,6 @@ import android.widget.Toast;
 
 import com.now.fitness.nowfitnessui.Model.Database;
 import com.now.fitness.nowfitnessui.Object.MyWorkout;
-import com.now.fitness.nowfitnessui.Object.MyWorkoutPlan;
 import com.now.fitness.nowfitnessui.R;
 
 import java.util.ArrayList;
@@ -22,18 +23,26 @@ import java.util.List;
 public class  MyWorkoutActivity extends AppCompatActivity {
 
     private ListView mListView;
+    private Toolbar mToolbar;
+    private ActionBar mActionBar;
     Database mDb;
-
-    private int myWorkoutPlanId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_workout);
+        setTitle("My Workout");
 
         Intent receivedIntent = getIntent();
 
         mListView = (ListView) findViewById(R.id.listView_MyWorkoutList);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar_MyWorkout);
+        setSupportActionBar(mToolbar);
+
+        mActionBar = getSupportActionBar();
+
+        mActionBar.setDisplayHomeAsUpEnabled(true);
+        mActionBar.setHomeButtonEnabled(true);
 
         getMyWorkoutList(receivedIntent.getIntExtra("MyWorkoutPlanId", -1));
 
@@ -62,15 +71,17 @@ public class  MyWorkoutActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
                     int myWorkoutId = myWorkoutList.get(i).getMyWorkoutId();
+                    String myWorkoutRoutineName = myWorkoutList.get(i).getMyWorkoutName();
 
                     Intent myWorkoutActivityIntent = new Intent(MyWorkoutActivity.this, MyWorkoutRoutineActivity.class);
 
+                    myWorkoutActivityIntent.putExtra("MyWorkoutRoutineName", myWorkoutRoutineName);
                     myWorkoutActivityIntent.putExtra("MyWorkoutPlanId", myWorkoutPlanId);
                     myWorkoutActivityIntent.putExtra("MyWorkoutId", myWorkoutId);
                     Log.i("Workout Plan Id:", String.valueOf(myWorkoutPlanId));
                     Log.i("My Workout Id:", String.valueOf(myWorkoutId));
 
-                    Toast.makeText(MyWorkoutActivity.this, String.valueOf(myWorkoutId), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(MyWorkoutActivity.this, String.valueOf(myWorkoutId), Toast.LENGTH_LONG).show();
                     startActivity(myWorkoutActivityIntent);
                 }
             });

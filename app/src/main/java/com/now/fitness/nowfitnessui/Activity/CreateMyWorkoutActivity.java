@@ -3,12 +3,15 @@ package com.now.fitness.nowfitnessui.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.now.fitness.nowfitnessui.DAL.MyWorkoutDAL;
@@ -23,11 +26,11 @@ import java.util.List;
 public class CreateMyWorkoutActivity extends AppCompatActivity {
 
     MyWorkoutPlan myWorkoutPlan;
-    MyWorkoutPlanDAL myWorkoutPlanDAL;
     MyWorkout myWorkout;
-    MyWorkoutDAL myWorkoutDAL;
     EditText mWorkoutName, mNumberOfWorkouts;
     Button mButton;
+    private Toolbar mToolbar;
+    private ActionBar mActionBar;
 
     public static Database mDb;
 
@@ -35,12 +38,22 @@ public class CreateMyWorkoutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_my_workout);
+        setTitle("Create Workout Plan");
+
+        mToolbar = (Toolbar) findViewById(R.id.toolbar_CreateMyWorkout);
+        setSupportActionBar(mToolbar);
+
+        mActionBar = getSupportActionBar();
+
+        mActionBar.setDisplayHomeAsUpEnabled(true);
+        mActionBar.setHomeButtonEnabled(true);
 
         myWorkoutPlan = new MyWorkoutPlan();
         myWorkout = new MyWorkout();
         mWorkoutName = (EditText) findViewById(R.id.editText_WorkoutName);
         mNumberOfWorkouts = (EditText) findViewById(R.id.editText_NumberOfWorkouts);
         mButton = (Button) findViewById(R.id.button_CreateWorkoutPlan);
+
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
