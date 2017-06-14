@@ -19,9 +19,12 @@ import com.now.fitness.nowfitnessui.DAL.MyWorkoutPlanDAL;
 import com.now.fitness.nowfitnessui.Model.Database;
 import com.now.fitness.nowfitnessui.Object.MyWorkout;
 import com.now.fitness.nowfitnessui.Object.MyWorkoutPlan;
+import com.now.fitness.nowfitnessui.Object.UserProfile;
 import com.now.fitness.nowfitnessui.R;
 
 import java.util.List;
+
+import static android.R.attr.duration;
 
 public class CreateMyWorkoutActivity extends AppCompatActivity {
 
@@ -37,6 +40,8 @@ public class CreateMyWorkoutActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_create_my_workout);
         setTitle("Create Workout Plan");
 
@@ -54,47 +59,59 @@ public class CreateMyWorkoutActivity extends AppCompatActivity {
         mNumberOfWorkouts = (EditText) findViewById(R.id.editText_NumberOfWorkouts);
         mButton = (Button) findViewById(R.id.button_CreateWorkoutPlan);
 
-
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int flag = 0;
                 //Get values of EditText
                 String planName = mWorkoutName.getText().toString();
                 int numberOfWorkouts = Integer.parseInt(mNumberOfWorkouts.getText().toString());
 
-                //Create and open new Database
-                mDb = new Database(CreateMyWorkoutActivity.this);
-
-                mDb.open();
-
-                //Store values to entities of myWorkoutPlan
-                myWorkoutPlan.setMyWorkoutPlanName(planName);
-                myWorkoutPlan.setNumberOfWorkouts(numberOfWorkouts);
-
-                //Call DAL Object
-                boolean insertWorkoutPlan = Database.mMyWorkoutPlanDAL.insertMyWorkoutPlan(myWorkoutPlan);
-
-                mDb.close();
-
-
-
-                mDb.open();
-                int myWorkoutPlanId = Database.mMyWorkoutPlanDAL.findAll().size() - 1;
-
-                for (int i = 0; i < numberOfWorkouts; i++) {
-                    //Store values to entities of myWorkout
-                    myWorkout.setMyWorkoutName(planName + " " + (i + 1));
-                    Log.d("Workout Name:", planName + " " + (i + 1));
-                    myWorkout.setMyWorkoutPlanId(myWorkoutPlanId + 1);
-                    Log.d("Workout Plan Id:", String.valueOf(myWorkoutPlanId) + 1);
-
-                    Database.mMyWorkoutDAL.insertMyWorkout(myWorkout);
+                //perform validation for required fields workout plan name and numberof workouts
+                if (mWorkoutName.getText().toString().length() == 0) {
+                    mWorkoutName.setError("First name is required!");
+                    flag++;
                 }
 
-                mDb.close();
-                finish();
+                //Passed the validation
+                if (flag == 0) {
+                    //Store values to entities of myWorkoutPlan
+                    myWorkoutPlan.setMyWorkoutPlanName(planName);
+                    myWorkoutPlan.setNumberOfWorkouts(numberOfWorkouts);
 
+
+                    try {
+                        //Create and open new Database
+
+
+                        mDb = new Database(CreateMyWorkoutActivity.this);
+
+                        mDb.open();
+
+
+                        //Call DAL Object
+                        boolean insertWorkoutPlan = Database.mMyWorkoutPlanDAL.insertMyWorkoutPlan(myWorkoutPlan);
+
+                        int myWorkoutPlanId = Database.mMyWorkoutPlanDAL.findAll().size() - 1;
+
+                        for (int i = 0; i < numberOfWorkouts; i++) {
+                            //Store values to entities of myWorkout
+                            myWorkout.setMyWorkoutName(planName + " " + (i + 1));
+                            Log.d("Workout Name:", planName + " " + (i + 1));
+                            myWorkout.setMyWorkoutPlanId(myWorkoutPlanId + 1);
+                            Log.d("Workout Plan Id:", String.valueOf(myWorkoutPlanId) + 1);
+
+                            Database.mMyWorkoutDAL.insertMyWorkout(myWorkout);
+                        }
+
+                        mDb.close();
+                    } catch (Exception e) {
+                        Toast.makeText(CreateMyWorkoutActivity.this, R.string.prompt_success_insert, Toast.LENGTH_LONG).show();
+                    }
+                    finish();
+                }
             }
         });
     }
+
 }

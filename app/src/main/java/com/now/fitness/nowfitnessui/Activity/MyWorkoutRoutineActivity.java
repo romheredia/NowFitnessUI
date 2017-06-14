@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -49,6 +50,9 @@ public class MyWorkoutRoutineActivity extends AppCompatActivity {
 
         mActionBar.setDisplayHomeAsUpEnabled(true);
         mActionBar.setHomeButtonEnabled(true);
+
+
+
 
         mListView = (ListView) findViewById(R.id.listView_MyWorkoutRoutine);
         mButton = (Button) findViewById(R.id.button_AddWorkoutRoutine);
@@ -97,6 +101,16 @@ public class MyWorkoutRoutineActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         refreshOnResume = true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void getWorkoutRoutineList() {
