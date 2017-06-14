@@ -23,6 +23,11 @@ import com.now.fitness.nowfitnessui.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is the data access layer for the UserProfile Model which imp
+ * @author  Romeric Heredia
+ */
+
 public class MyWorkoutRoutineActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
@@ -113,6 +118,10 @@ public class MyWorkoutRoutineActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Gets the list for Workout Routine
+     *
+     */
     public void getWorkoutRoutineList() {
         mDb = new Database(MyWorkoutRoutineActivity.this);
         mDb.open();

@@ -35,6 +35,10 @@ public class WorkoutListActivity extends AppCompatActivity {
     private int myWorkoutId;
     private int workoutId;
 
+    /**
+     * Creates the view for WorkoutListActivity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +69,10 @@ public class WorkoutListActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Gets the list for Workout List
+     *
+     */
     public void getWorkoutList() {
         try {
             mDb = new Database(WorkoutListActivity.this);

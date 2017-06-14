@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +27,12 @@ import java.util.List;
 
 import static android.R.attr.duration;
 
+
+/**
+ * This class is the data access layer for the UserProfile Model which imp
+ * @author  Romeric Heredia
+ */
+
 public class CreateMyWorkoutActivity extends AppCompatActivity {
 
     MyWorkoutPlan myWorkoutPlan;
@@ -38,6 +45,10 @@ public class CreateMyWorkoutActivity extends AppCompatActivity {
     public static Database mDb;
     int numberOfWorkouts;
 
+    /**
+     * Creates the view for CreateMyWorkoutActivity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,6 +132,16 @@ public class CreateMyWorkoutActivity extends AppCompatActivity {
                 }
             }
         });
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

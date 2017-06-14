@@ -21,6 +21,11 @@ import com.now.fitness.nowfitnessui.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is the data access layer for the UserProfile Model which imp
+ * @author  Romeric Heredia
+ */
+
 public class  MyWorkoutActivity extends AppCompatActivity {
 
     private ListView mListView;
@@ -28,6 +33,10 @@ public class  MyWorkoutActivity extends AppCompatActivity {
     private ActionBar mActionBar;
     Database mDb;
 
+    /**
+     * Creates the view for MyWorkoutActivity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +67,10 @@ public class  MyWorkoutActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Gets the list for Workoutlist
+     * @param myWorkoutPlanId
+     */
     public void getMyWorkoutList(final int myWorkoutPlanId) {
         try {
             mDb = new Database(this);
