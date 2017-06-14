@@ -7,7 +7,8 @@ import com.now.fitness.nowfitnessui.Object.MyWorkoutRoutine;
 import java.util.List;
 
 /**
- * Created by Rom on 9/06/2017.
+ * This class is the interface for the WorkoutList data access layer
+ * @author Romeric Heredia on 9/06/2017.
  */
 
 public interface IMyWorkoutRoutine {

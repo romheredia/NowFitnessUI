@@ -22,9 +22,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class is the data access layer for the UserProfile Model which imp
- * @author  Romeric Heredia
- */
+ *
+ * This class is MyWorkoutActivity is for listing My Workout list created after creating a workout plan.
+ * @author Romeric Heredia
+ *
+ *
+ * */
 
 public class  MyWorkoutActivity extends AppCompatActivity {
 

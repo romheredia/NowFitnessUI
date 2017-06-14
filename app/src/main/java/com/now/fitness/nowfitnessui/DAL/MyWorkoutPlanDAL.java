@@ -13,9 +13,9 @@ import com.now.fitness.nowfitnessui.Object.MyWorkoutPlan;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
- * Created by Rom on 6/06/2017.
+ *  This class is the MyWorkoutPlan created Data access layer which implements the interface IWorkoutCreated and IWorkoutCreatedSchema
+ * @author Romeric Heredia on 6/06/2017.
  */
 
 public class MyWorkoutPlanDAL extends DBContentProvider implements IMyWorkoutPlan, IMyWorkoutPlan.IMyWorkoutPlanSchema {
@@ -28,6 +28,11 @@ public class MyWorkoutPlanDAL extends DBContentProvider implements IMyWorkoutPla
         super(db);
     }
 
+    /**
+     * Inserts workout to table tbmyworkout_plan
+     * @param myWorkoutPlan
+     * @return boolean
+     */
     @Override
     public boolean insertMyWorkoutPlan(MyWorkoutPlan myWorkoutPlan) {
         setContentValue(myWorkoutPlan);
@@ -67,6 +72,11 @@ public class MyWorkoutPlanDAL extends DBContentProvider implements IMyWorkoutPla
         return null;
     }
 
+    /**
+     * Retrieves MyWorkoutPlan by name
+     * @param name
+     * @return List<MyWorkoutPlan>
+     */
     @Override
     public List<MyWorkoutPlan> findByName(String name) {
         List<MyWorkoutPlan> myWorkoutPlanList = new ArrayList<>();
@@ -88,6 +98,11 @@ public class MyWorkoutPlanDAL extends DBContentProvider implements IMyWorkoutPla
         return myWorkoutPlanList;
     }
 
+    /**
+     * Retrieves result from cursor
+     * @param cursor
+     * @return WorkoutList
+     */
     @Override
     protected MyWorkoutPlan cursorToEntity(Cursor cursor) {
         MyWorkoutPlan myWorkoutPlan = new MyWorkoutPlan();
@@ -113,6 +128,10 @@ public class MyWorkoutPlanDAL extends DBContentProvider implements IMyWorkoutPla
         return myWorkoutPlan;
     }
 
+    /**
+     * Sets the content valaue
+     * @param myWorkoutPlan
+     */
     private void setContentValue(MyWorkoutPlan myWorkoutPlan) {
         initialValues = new ContentValues();
 
@@ -120,6 +139,10 @@ public class MyWorkoutPlanDAL extends DBContentProvider implements IMyWorkoutPla
         initialValues.put("number_of_workouts", myWorkoutPlan.getNumberOfWorkouts());
     }
 
+    /**
+     * retrieves the content values
+     * @return
+     */
     private ContentValues getContentValue() {
         return initialValues;
     }

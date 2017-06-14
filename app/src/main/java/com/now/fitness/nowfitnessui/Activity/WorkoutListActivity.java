@@ -24,6 +24,13 @@ import com.now.fitness.nowfitnessui.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * WorkoutListActivity displays the list of the workouts available.
+ * @author Romeric Heredia
+ *
+ *
+ * */
 public class WorkoutListActivity extends AppCompatActivity {
 
     private ListView mListView;

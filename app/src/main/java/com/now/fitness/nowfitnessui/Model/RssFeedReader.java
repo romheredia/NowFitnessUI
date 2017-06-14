@@ -24,7 +24,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 /**
- * Created by Rom on 4/06/2017.
+ * This class is for retrieving data from RssFeed
+ * @author Romeric Heredia on 4/06/2017.
  */
 
 public class RssFeedReader extends AsyncTask<Void, Void, Boolean> {
@@ -78,6 +79,10 @@ public class RssFeedReader extends AsyncTask<Void, Void, Boolean> {
         return false;
     }
 
+    /**
+     * Extracts data items from xml retrieved from RssFeedData
+     * @param data
+     */
     private void RssFeedParser(Document data) {
         try {
             if (data != null) {
@@ -119,6 +124,10 @@ public class RssFeedReader extends AsyncTask<Void, Void, Boolean> {
         }
     }
 
+    /**
+     * getRssFeedData returns Document data retrieved from a URL
+     *
+     */
     public Document getRssFeedData() {
         try {
             url = new URL(rssFeedUrl);

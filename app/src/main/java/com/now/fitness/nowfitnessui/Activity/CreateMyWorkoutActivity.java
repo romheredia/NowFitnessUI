@@ -29,9 +29,12 @@ import static android.R.attr.duration;
 
 
 /**
- * This class is the data access layer for the UserProfile Model which imp
- * @author  Romeric Heredia
- */
+ *
+ * This class CreateMyWorkoutActivity Class is for creating a workout plan
+ * @author Romeric Heredia
+ *
+ *
+ * */
 
 public class CreateMyWorkoutActivity extends AppCompatActivity {
 

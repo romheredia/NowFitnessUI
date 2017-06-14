@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Rom on 6/06/2017.
+ *  This class is the MyWorkout created Data access layer which implements the interface IWorkoutCreated and IWorkoutCreatedSchema
+ * @author Romeric Heredia on 6/06/2017.
  */
 
 public class MyWorkoutDAL extends DBContentProvider implements IMyWorkout, IMyWorkout.IMyWorkoutSchema {
@@ -28,6 +29,11 @@ public class MyWorkoutDAL extends DBContentProvider implements IMyWorkout, IMyWo
         super(db);
     }
 
+    /**
+     * Inserts workout to table tbmyworkout
+     * @param myWorkout
+     * @return boolean
+     */
     @Override
     public boolean insertMyWorkout(MyWorkout myWorkout) {
         setContentValue(myWorkout);
@@ -89,6 +95,11 @@ public class MyWorkoutDAL extends DBContentProvider implements IMyWorkout, IMyWo
         return null;
     }
 
+    /**
+     * Retrieves MyWorkout by name
+     * @param name
+     * @return List<MyWorkout>
+     */
     @Override
     public List<MyWorkout> findByName(String name) {
         List<MyWorkout> myWorkoutList = new ArrayList<>();
@@ -110,6 +121,11 @@ public class MyWorkoutDAL extends DBContentProvider implements IMyWorkout, IMyWo
         return myWorkoutList;
     }
 
+    /**
+     * Retrieves result from cursor
+     * @param cursor
+     * @return WorkoutList
+     */
     @Override
     protected MyWorkout cursorToEntity(Cursor cursor) {
         MyWorkout myWorkout = new MyWorkout();
@@ -135,6 +151,10 @@ public class MyWorkoutDAL extends DBContentProvider implements IMyWorkout, IMyWo
         return myWorkout;
     }
 
+    /**
+     * Sets the content valaue
+     * @param myWorkout
+     */
     private void setContentValue(MyWorkout myWorkout) {
         initialValues = new ContentValues();
 
@@ -142,6 +162,10 @@ public class MyWorkoutDAL extends DBContentProvider implements IMyWorkout, IMyWo
         initialValues.put("myworkout_plan_id", myWorkout.getMyWorkoutPlanId());
     }
 
+    /**
+     * retrieves the content values
+     * @return
+     */
     private ContentValues getContentValue() {
         return initialValues;
     }

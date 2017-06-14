@@ -1,7 +1,7 @@
 package com.now.fitness.nowfitnessui.Object;
 
 /**
- * Created by Rom on 3/06/2017.
+ * Created by Romeric Heredia on 3/06/2017.
  */
 
 public class RssFeedItem {

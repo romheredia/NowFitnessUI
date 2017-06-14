@@ -19,8 +19,10 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+
 /**
- * Created by Rom on 3/06/2017.
+ * This class is the adapter for RssFeed
+ * @author Romeric Heredia on 3/06/2017.
  */
 
 public class RssFeedAdapter extends RecyclerView.Adapter<RssFeedAdapter.RssFeedViewHolder> {
@@ -66,6 +68,10 @@ public class RssFeedAdapter extends RecyclerView.Adapter<RssFeedAdapter.RssFeedV
     @Override
     public int getItemCount() { return mRssFeedItems.size(); }
 
+    /**
+     * RssFeedViewHolder attaches rss feed items to recycleview
+     *
+     */
     public class RssFeedViewHolder extends RecyclerView.ViewHolder {
         private TextView titleText, titleDescription, pubDate;
         private ImageView titleImage;

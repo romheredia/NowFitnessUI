@@ -18,7 +18,8 @@ import java.util.List;
 import static com.now.fitness.nowfitnessui.Interface.IWorkoutList.IWorkoutListSchema.COLUMN_NAME;
 
 /**
- * Created by Rom on 9/06/2017.
+ *  This class is the MyWorkoutRoutine Data access layer which implements the interface IWorkoutCreated and IWorkoutCreatedSchema
+ * @author Romeric Heredia on 9/06/2017.
  */
 
 public class MyWorkoutRoutineDAL extends DBContentProvider implements IMyWorkoutRoutine, IMyWorkoutRoutine.IMyWorkoutRoutineSchema {
@@ -32,6 +33,11 @@ public class MyWorkoutRoutineDAL extends DBContentProvider implements IMyWorkout
         super(db);
     }
 
+    /**
+     * Inserts workout to table tbmyworkout_routine
+     * @param myWorkoutRoutine
+     * @return boolean
+     */
     @Override
     public boolean insertMyWorkoutRoutine(MyWorkoutRoutine myWorkoutRoutine) {
         setContentValue(myWorkoutRoutine);
@@ -118,11 +124,21 @@ public class MyWorkoutRoutineDAL extends DBContentProvider implements IMyWorkout
         return null;
     }
 
+    /**
+     * Retrieves MyWorkoutRoutine by name
+     * @param name
+     * @return List<MyWorkoutRoutine>
+     */
     @Override
     public List<MyWorkoutRoutine> findByName(String name) {
         return null;
     }
 
+    /**
+     * Retrieves result from cursor
+     * @param cursor
+     * @return WorkoutList
+     */
     @Override
     protected MyWorkoutRoutine cursorToEntity(Cursor cursor) {
         MyWorkoutRoutine myWorkoutRoutine = new MyWorkoutRoutine();
@@ -160,6 +176,10 @@ public class MyWorkoutRoutineDAL extends DBContentProvider implements IMyWorkout
         return myWorkoutRoutine;
     }
 
+    /**
+     * Sets the content valaue
+     * @param myWorkoutRoutine
+     */
     private void setContentValue(MyWorkoutRoutine myWorkoutRoutine) {
         initialValues = new ContentValues();
         initialValues.put("myworkout_plan_id", myWorkoutRoutine.getMyWorkoutPlanId());
@@ -168,6 +188,10 @@ public class MyWorkoutRoutineDAL extends DBContentProvider implements IMyWorkout
 //        initialValues.put("name", myWorkoutRoutine.getWorkoutName());
     }
 
+    /**
+     * retrieves the content values
+     * @return
+     */
     private ContentValues getContentValue() {
         return initialValues;
     }
