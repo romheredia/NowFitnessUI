@@ -41,6 +41,11 @@ public class Database {
         this.mContext = context;
     }
 
+    /**
+     * Opens the database and creates the table objects
+     * @return Database
+     * @throws SQLException
+     */
     public Database open() throws SQLException {
         mDbHelper = new DatabaseHelper(mContext);
         SQLiteDatabase mDb = mDbHelper.getWritableDatabase();
@@ -56,11 +61,16 @@ public class Database {
         return this;
     }
 
+    /**
+     * Closes the database
+     */
     public void close() {
         mDbHelper.close();
     }
 
-
+    /**
+     * Creates the table
+     */
     private static class DatabaseHelper extends SQLiteOpenHelper {
         DatabaseHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -81,6 +91,12 @@ public class Database {
             db.execSQL(IWorkoutList.IWorkoutListSchema.POPULATE_TABLE);
         }
 
+        /**
+         * Drops the table if it already exists
+         * @param db
+         * @param oldVersion
+         * @param newVersion
+         */
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion,
                               int newVersion) {
