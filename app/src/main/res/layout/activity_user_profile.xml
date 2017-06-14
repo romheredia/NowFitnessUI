@@ -135,7 +135,7 @@
         android:id="@+id/editText_Weight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="text"
+        android:inputType="numberDecimal"
         android:layout_below="@+id/textView_Weight"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -148,7 +148,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView_Height"
         android:layout_alignParentLeft="true"
-        android:inputType="text"
+        android:inputType="numberDecimal"
         android:layout_alignParentRight="true" />
 
 </RelativeLayout>
