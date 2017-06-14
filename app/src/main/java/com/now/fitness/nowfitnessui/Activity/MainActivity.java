@@ -22,7 +22,7 @@ import java.util.List;
 
 /**
  *
- * This class is the Main Activity
+ * This class is the Main Activity of NOW Fitness application
  * @author Romeric Heredia
  *
  *

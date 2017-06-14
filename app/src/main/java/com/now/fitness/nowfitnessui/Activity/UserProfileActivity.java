@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
- * This class is the User Profile Activity
+ * This class is the User Profile Activity in which user will input their detials to be able to use the application
  * @author Maycor Gerilla, Romeric Heredia
  **/
 public class UserProfileActivity extends AppCompatActivity {
