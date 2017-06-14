@@ -36,6 +36,7 @@ public class CreateMyWorkoutActivity extends AppCompatActivity {
     private ActionBar mActionBar;
 
     public static Database mDb;
+    int numberOfWorkouts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,11 +66,19 @@ public class CreateMyWorkoutActivity extends AppCompatActivity {
                 int flag = 0;
                 //Get values of EditText
                 String planName = mWorkoutName.getText().toString();
-                int numberOfWorkouts = Integer.parseInt(mNumberOfWorkouts.getText().toString());
+//
 
                 //perform validation for required fields workout plan name and numberof workouts
                 if (mWorkoutName.getText().toString().length() == 0) {
-                    mWorkoutName.setError("First name is required!");
+                    mWorkoutName.setError("Workout Name is required!");
+                    flag++;
+                }
+
+                //perform validation for height and weight input
+                try {
+                    numberOfWorkouts = Integer.parseInt(mNumberOfWorkouts.getText().toString());
+                } catch (NumberFormatException e) {
+                    mNumberOfWorkouts.setError("Incorrect input!");
                     flag++;
                 }
 
