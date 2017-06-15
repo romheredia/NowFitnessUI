@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.now.fitness.nowfitnessui">
+    package="com.now.fitness.nowfitnessui"
+    android:versionCode="1"
+    android:versionName="1.0.0">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -8,9 +10,9 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:parentActivityName="com.now.fitness.nowfitnessui.MainActivity"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:parentActivityName="com.now.fitness.nowfitnessui.MainActivity"
         android:theme="@style/NowTheme">
         <activity
             android:name=".Activity.SplashActivity"
@@ -22,15 +24,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.UserProfileActivity" />
-        <activity android:name=".Activity.MainActivity">
-
-        </activity>
+        <activity android:name=".Activity.MainActivity"></activity>
         <activity android:name=".Activity.CreateMyWorkoutActivity" />
         <activity android:name=".Activity.MyWorkoutActivity" />
         <activity android:name=".Activity.MyWorkoutRoutineActivity" />
-        <activity android:name=".Activity.WorkoutListActivity"></activity>
-        <activity android:name=".Activity.NowActivity"></activity>
-        <activity android:name=".Activity.NowMainActivity"></activity>
+        <activity android:name=".Activity.WorkoutListActivity" />
+        <activity android:name=".Activity.NowActivity" />
+        <activity android:name=".Activity.NowMainActivity" />
+        <activity android:name=".Activity.MyWorkoutRoutineEditActivity"></activity>
     </application>
 
 </manifest>

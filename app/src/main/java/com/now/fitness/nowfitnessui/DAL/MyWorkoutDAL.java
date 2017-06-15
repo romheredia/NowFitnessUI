@@ -46,8 +46,16 @@ public class MyWorkoutDAL extends DBContentProvider implements IMyWorkout, IMyWo
     }
 
     @Override
-    public boolean updateMyWorkouts(MyWorkout myWorkout) {
-        return false;
+    public boolean updateMyWorkoutName(int id, String myWorkoutName) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_MYWORKOUT_NAME, myWorkoutName);
+        try {
+            update(MYWORKOUT_TABLE, contentValues,COLUMN_MYWORKOUT_ID + "=" + id, null);
+            return true;
+        } catch (SQLiteConstraintException e) {
+            Log.d(TAG, "error: " + e.getMessage());
+            return false;
+        }
     }
 
     @Override
@@ -65,6 +73,23 @@ public class MyWorkoutDAL extends DBContentProvider implements IMyWorkout, IMyWo
             cursor.close();
         }
         return myWorkoutList;
+    }
+
+    @Override
+    public MyWorkout findByMyWorkoutId(int id) {
+        MyWorkout myWorkout = new MyWorkout();
+        cursor = rawQuery("SELECT myworkout_id, myworkout_name from tbmyworkout where myworkout_id = ?", new String[] {(String.valueOf(id))});
+        if (cursor != null) {
+            cursor.moveToFirst();
+            Log.i("CURSOR","here");
+            while (!cursor.isAfterLast()) {
+                Log.i("CURSOR","Not null");
+                myWorkout = cursorToEntity(cursor);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        return myWorkout;
     }
 
     @Override

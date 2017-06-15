@@ -1,5 +1,6 @@
 package com.now.fitness.nowfitnessui.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
@@ -24,19 +26,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * This class is MyWorkoutActivity is for listing My Workout list created after creating a workout plan.
+ *
  * @author Romeric Heredia
- *
- *
- * */
+ */
 
 public class MyWorkoutRoutineActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
     private ActionBar mActionBar;
     private ListView mListView;
-    private Button mButton;
+    private Button mButton, mButtonEdit;
 
     private String myWorkoutRoutineName;
     private int myWorkoutPlanId;
@@ -60,10 +60,9 @@ public class MyWorkoutRoutineActivity extends AppCompatActivity {
         mActionBar.setHomeButtonEnabled(true);
 
 
-
-
         mListView = (ListView) findViewById(R.id.listView_MyWorkoutRoutine);
         mButton = (Button) findViewById(R.id.button_AddWorkoutRoutine);
+        mButtonEdit = (Button) findViewById(R.id.button_EditWorkoutRoutine);
 
 
         //get the intent extra from the ListDataActivity
@@ -94,12 +93,28 @@ public class MyWorkoutRoutineActivity extends AppCompatActivity {
             }
         });
 
+        mButtonEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent WorkoutListActivityIntent = new Intent(MyWorkoutRoutineActivity.this, MyWorkoutRoutineEditActivity.class);
+
+                WorkoutListActivityIntent.putExtra("MyWorkoutId", myWorkoutId);
+
+                Log.i("Workout Plan Id:", String.valueOf(myWorkoutPlanId));
+                Log.i("My Workout Id:", String.valueOf(myWorkoutId));
+
+                startActivity(WorkoutListActivityIntent);
+            }
+        });
     }
 
     @Override
     protected void onPostResume() {
         super.onPostResume();
         if (refreshOnResume) {
+            Intent receivedIntent = getIntent();
+            myWorkoutRoutineName = receivedIntent.getStringExtra("MyWorkoutRoutineName");
+            setTitle(myWorkoutRoutineName);
             getWorkoutRoutineList();
         } else {
         }
@@ -115,7 +130,7 @@ public class MyWorkoutRoutineActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id == android.R.id.home){
+        if (id == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);
@@ -123,15 +138,14 @@ public class MyWorkoutRoutineActivity extends AppCompatActivity {
 
     /**
      * Gets the list for Workout Routine
-     *
      */
     public void getWorkoutRoutineList() {
         mDb = new Database(MyWorkoutRoutineActivity.this);
         mDb.open();
 
         try {
-            List<MyWorkoutRoutine> myWorkoutRoutineList = Database.mMyWorkoutRoutineDAL.findMyWorkoutRoutine(myWorkoutPlanId, myWorkoutId);
-            List<WorkoutList> workoutList  = Database.mWorkoutListDAL.findAll();
+            final List<MyWorkoutRoutine> myWorkoutRoutineList = Database.mMyWorkoutRoutineDAL.findMyWorkoutRoutine(myWorkoutPlanId, myWorkoutId);
+            List<WorkoutList> workoutList = Database.mWorkoutListDAL.findAll();
             ArrayList<String> idList = new ArrayList<>();
             ArrayList<String> nameList = new ArrayList<>();
 
@@ -146,6 +160,25 @@ public class MyWorkoutRoutineActivity extends AppCompatActivity {
                 ListAdapter listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nameList);
                 mListView.setAdapter(listAdapter);
             }
+
+            mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
+                    int workoutRoutineId = myWorkoutRoutineList.get(i).getMyWorkoutRoutineId();
+
+//                    Toast.makeText(MyWorkoutRoutineActivity.this, String.valueOf(WorkoutId), Toast.LENGTH_LONG).show();
+
+                    mDb.open();
+                    boolean deleteWorkout = Database.mMyWorkoutRoutineDAL.deleteByMyWorkoutRoutineId(workoutRoutineId);
+                    if (deleteWorkout) {
+                        Toast.makeText(MyWorkoutRoutineActivity.this, "Workout Deleted", Toast.LENGTH_LONG).show();
+                    }
+                    mDb.close();
+
+                    getWorkoutRoutineList();
+                }
+            });
+
         } catch (Exception e) {
             e.printStackTrace();
         }

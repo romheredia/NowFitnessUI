@@ -36,6 +36,7 @@ public class  MyWorkoutActivity extends AppCompatActivity {
     private ActionBar mActionBar;
     Database mDb;
 
+    private boolean refreshOnResume = false;
     /**
      * Creates the view for MyWorkoutActivity
      * @param savedInstanceState
@@ -60,6 +61,23 @@ public class  MyWorkoutActivity extends AppCompatActivity {
         getMyWorkoutList(receivedIntent.getIntExtra("MyWorkoutPlanId", -1));
 
     }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        if (refreshOnResume) {
+            Intent receivedIntent = getIntent();
+            getMyWorkoutList(receivedIntent.getIntExtra("MyWorkoutPlanId", -1));
+        } else {
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        refreshOnResume = true;
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -12,8 +12,9 @@ import java.util.List;
 
 public interface IMyWorkout {
     boolean insertMyWorkout(MyWorkout myWorkout);
-    boolean updateMyWorkouts(MyWorkout myWorkout);
+    boolean updateMyWorkoutName(int id, String myWorkoutName);
     List<MyWorkout> findAll();
+    MyWorkout findByMyWorkoutId(int id);
     List<MyWorkout> findByMyWorkoutPlanId(int id);
     List<MyWorkout> findByCode(String code);
     List<MyWorkout> findByName(String name);

@@ -55,6 +55,15 @@ public class MyWorkoutRoutineDAL extends DBContentProvider implements IMyWorkout
     }
 
     @Override
+    public boolean deleteByMyWorkoutRoutineId(int routineId) {
+        try {
+            return super.delete(MYWORKOUTROUTINE_TABLE, COLUMN_ROUTINE_ID + "=" + routineId, null) > 0;
+        } catch (SQLiteConstraintException e) {
+            return false;
+        }
+    }
+
+    @Override
     public List<MyWorkoutRoutine> findAll() {
         List<MyWorkoutRoutine> myWorkoutRoutineList = new ArrayList<>();
         cursor = super.query(MYWORKOUTROUTINE_TABLE, MYWORKOUTROUTINE_COLUMNS, null, null, COLUMN_ROUTINE_ID);

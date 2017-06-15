@@ -14,6 +14,7 @@ import java.util.List;
 public interface IMyWorkoutRoutine {
     boolean insertMyWorkoutRoutine(MyWorkoutRoutine myWorkoutRoutine);
     boolean updateMyWorkoutRoutine(MyWorkoutRoutine myWorkoutRoutine);
+    boolean deleteByMyWorkoutRoutineId(int routineId);
     List<MyWorkoutRoutine> findAll();
     List<MyWorkoutRoutine> findMyWorkoutRoutine(int planId, int myWorkoutId);
     List<MyWorkoutRoutine> findByMyWorkoutRoutineId(int routineId);
