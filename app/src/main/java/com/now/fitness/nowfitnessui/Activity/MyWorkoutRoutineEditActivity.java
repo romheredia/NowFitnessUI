@@ -33,7 +33,7 @@ public class MyWorkoutRoutineEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_workout_routine_edit);
         mToolbar = (Toolbar) findViewById(R.id.toolbar_EditMyWorkoutRoutine);
         setSupportActionBar(mToolbar);
-        setTitle("Edit Workout Name");
+        setTitle("Edit Workout Routine Name");
 
         mActionBar = getSupportActionBar();
 
@@ -59,12 +59,32 @@ public class MyWorkoutRoutineEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                mDb.open();
+                int flag = 0;
+                //Get values of EditText
+                String routineName = mEditText.getText().toString();
+//
 
-                boolean editMyWorkoutRoutineName = Database.mMyWorkoutDAL.updateMyWorkoutName(myWorkoutId, mEditText.getText().toString());
-                Toast.makeText(MyWorkoutRoutineEditActivity.this, "Workout Name Updated", Toast.LENGTH_LONG).show();
-                mDb.close();
-                finish();
+                //perform validation for required fields workout plan name and numberof workouts
+                if (mEditText.getText().toString().length() == 0) {
+                    mEditText.setError("Workout Name is required!");
+                    flag++;
+                }
+
+                //Passed the validation
+                if (flag == 0) {
+                    //Store values to entities of myWorkoutPlan
+                    try {
+                        mDb.open();
+
+                        boolean editMyWorkoutRoutineName = Database.mMyWorkoutDAL.updateMyWorkoutName(myWorkoutId, mEditText.getText().toString());
+                        Toast.makeText(MyWorkoutRoutineEditActivity.this, "Workout Name Updated", Toast.LENGTH_LONG).show();
+                        mDb.close();
+
+                        finish();
+                    } catch (Exception e) {
+                        Toast.makeText(MyWorkoutRoutineEditActivity.this, R.string.prompt_error, Toast.LENGTH_LONG).show();
+                    }
+                }
             }
         });
 
@@ -73,7 +93,7 @@ public class MyWorkoutRoutineEditActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id == android.R.id.home){
+        if (id == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);

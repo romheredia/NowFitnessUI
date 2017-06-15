@@ -122,18 +122,20 @@ public class MyWorkoutRoutineActivity extends AppCompatActivity {
     protected void onPostResume() {
         super.onPostResume();
         if (refreshOnResume) {
-            mDb = new Database(MyWorkoutRoutineActivity.this);
-            mDb.open();
+            try {
+                mDb = new Database(MyWorkoutRoutineActivity.this);
+                mDb.open();
 
-            MyWorkout myWorkout = Database.mMyWorkoutDAL.findByMyWorkoutId(myWorkoutId);
-            myWorkoutRoutineName = myWorkout.getMyWorkoutName();
+                MyWorkout myWorkout = Database.mMyWorkoutDAL.findByMyWorkoutId(myWorkoutId);
+                myWorkoutRoutineName = myWorkout.getMyWorkoutName();
 
-            setTitle(myWorkoutRoutineName);
+                setTitle(myWorkoutRoutineName);
 //        mEditText.setText();
-            mDb.close();
+                mDb.close();
+            } catch (Exception e) {
 
+            }
             getWorkoutRoutineList();
-        } else {
         }
     }
 
@@ -185,13 +187,16 @@ public class MyWorkoutRoutineActivity extends AppCompatActivity {
 
 //                    Toast.makeText(MyWorkoutRoutineActivity.this, String.valueOf(WorkoutId), Toast.LENGTH_LONG).show();
 
-                    mDb.open();
-                    boolean deleteWorkout = Database.mMyWorkoutRoutineDAL.deleteByMyWorkoutRoutineId(workoutRoutineId);
-                    if (deleteWorkout) {
-                        Toast.makeText(MyWorkoutRoutineActivity.this, "Workout Deleted", Toast.LENGTH_LONG).show();
-                    }
-                    mDb.close();
+                    try {
+                        mDb.open();
+                        boolean deleteWorkout = Database.mMyWorkoutRoutineDAL.deleteByMyWorkoutRoutineId(workoutRoutineId);
+                        if (deleteWorkout) {
+                            Toast.makeText(MyWorkoutRoutineActivity.this, "Workout Deleted", Toast.LENGTH_LONG).show();
+                        }
+                        mDb.close();
+                    } catch (Exception e) {
 
+                    }
                     getWorkoutRoutineList();
                 }
             });
