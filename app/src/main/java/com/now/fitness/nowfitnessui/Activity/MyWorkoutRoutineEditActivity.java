@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.now.fitness.nowfitnessui.Model.Database;
 import com.now.fitness.nowfitnessui.Object.MyWorkout;
@@ -30,9 +31,9 @@ public class MyWorkoutRoutineEditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_workout_routine_edit);
-
         mToolbar = (Toolbar) findViewById(R.id.toolbar_EditMyWorkoutRoutine);
         setSupportActionBar(mToolbar);
+        setTitle("Edit Workout Name");
 
         mActionBar = getSupportActionBar();
 
@@ -61,7 +62,7 @@ public class MyWorkoutRoutineEditActivity extends AppCompatActivity {
                 mDb.open();
 
                 boolean editMyWorkoutRoutineName = Database.mMyWorkoutDAL.updateMyWorkoutName(myWorkoutId, mEditText.getText().toString());
-
+                Toast.makeText(MyWorkoutRoutineEditActivity.this, "Workout Name Updated", Toast.LENGTH_LONG).show();
                 mDb.close();
                 finish();
             }

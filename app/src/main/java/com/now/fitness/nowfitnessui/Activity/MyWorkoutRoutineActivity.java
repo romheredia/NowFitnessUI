@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.now.fitness.nowfitnessui.Model.Database;
+import com.now.fitness.nowfitnessui.Object.MyWorkout;
 import com.now.fitness.nowfitnessui.Object.MyWorkoutPlan;
 import com.now.fitness.nowfitnessui.Object.MyWorkoutRoutine;
 import com.now.fitness.nowfitnessui.Object.WorkoutList;
@@ -69,11 +70,20 @@ public class MyWorkoutRoutineActivity extends AppCompatActivity {
         Intent receivedIntent = getIntent();
 
         //now get the itemID we passed as an extra
-        myWorkoutRoutineName = receivedIntent.getStringExtra("MyWorkoutRoutineName");
         myWorkoutPlanId = receivedIntent.getIntExtra("MyWorkoutPlanId", -1);
         myWorkoutId = receivedIntent.getIntExtra("MyWorkoutId", -1);
 
+        mDb = new Database(MyWorkoutRoutineActivity.this);
+        mDb.open();
+
+        MyWorkout myWorkout = Database.mMyWorkoutDAL.findByMyWorkoutId(myWorkoutId);
+        myWorkoutRoutineName = myWorkout.getMyWorkoutName();
+
         setTitle(myWorkoutRoutineName);
+//        mEditText.setText();
+        mDb.close();
+
+
         getWorkoutRoutineList();
 
         mButton.setOnClickListener(new View.OnClickListener() {
@@ -112,9 +122,16 @@ public class MyWorkoutRoutineActivity extends AppCompatActivity {
     protected void onPostResume() {
         super.onPostResume();
         if (refreshOnResume) {
-            Intent receivedIntent = getIntent();
-            myWorkoutRoutineName = receivedIntent.getStringExtra("MyWorkoutRoutineName");
+            mDb = new Database(MyWorkoutRoutineActivity.this);
+            mDb.open();
+
+            MyWorkout myWorkout = Database.mMyWorkoutDAL.findByMyWorkoutId(myWorkoutId);
+            myWorkoutRoutineName = myWorkout.getMyWorkoutName();
+
             setTitle(myWorkoutRoutineName);
+//        mEditText.setText();
+            mDb.close();
+
             getWorkoutRoutineList();
         } else {
         }
