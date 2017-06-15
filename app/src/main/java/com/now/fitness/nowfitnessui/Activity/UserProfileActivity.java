@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
- * This class is the User Profile Activity in which user will input their detials to be able to use the application
+ * This class is the User Profile Activity in which user will input their details to be able to use the application
  * @author Maycor Gerilla, Romeric Heredia
  **/
 public class UserProfileActivity extends AppCompatActivity {
@@ -132,7 +132,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
         textView = (TextView) findViewById(R.id.textView_Gender);
         if(mRadioGroup.getCheckedRadioButtonId()<0){
-            textView.setError("Please a gender");
+            textView.setError("Please input gender");
             flag++;
         }
 
